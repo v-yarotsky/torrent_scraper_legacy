@@ -1,5 +1,5 @@
 - @trackers.includes(:torrents).each do |tracker|
-  %div.tracker.spoiler
+  %div{ :id => "tracker_#{tracker.id}_spoiler", :class => "tracker spoiler" }
     %span.caption
       %h2= tracker.name
     %div.content

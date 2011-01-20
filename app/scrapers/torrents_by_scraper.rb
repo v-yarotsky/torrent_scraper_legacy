@@ -46,7 +46,7 @@ class TorrentsByScraper < TorrentScraperBase
     torrent_attributes = {
       :title => row.at_css('td.row4.med.tLeft a b').text,
       :link => form_link(row.at_css("a.tr-dl")),
-      :tracker_link => form_link(row.at_css('td.row4.med.tLeft a b')),
+      :tracker_link => form_link(row.at_css('td.row4.med.tLeft a')),
       :size => Utils.parse_size(row.at_css("a.tr-dl span.bold").text),
       :seeders => row.at_css("td.seedmed b").text.to_i,
       :tracker_category => category

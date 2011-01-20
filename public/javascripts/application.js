@@ -11,6 +11,7 @@ function add_fields(link, association, content) {
 
 $(document).ready(function(){
     $("div.spoiler span.caption").live("click", function() {
-        $(this).next(".content").slideToggle();
+        element = $(this);
+        element.next(".content").slideToggle();
     });
 });
