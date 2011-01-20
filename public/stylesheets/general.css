@@ -1,0 +1,165 @@
+body {
+  background-color: white;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  font-family: arial, verdana;
+  font-size: 10pt; }
+
+a {
+  color: #5d5d5d;
+  text-decoration: none; }
+  a:hover {
+    color: #aaaaaa !important; }
+
+div.pagination a:hover {
+  color: black !important; }
+
+div.content {
+  padding: 20px; }
+  div.content h2 {
+    color: #222222; }
+  div.content h3 {
+    padding-left: 20px;
+    color: #555555;
+    font-style: italic; }
+  div.content div.tbl table {
+    border-collapse: collapse;
+    border: 2px solid #2e2e2e;
+    border-spacing: 0;
+    width: 100%; }
+    div.content div.tbl table thead tr {
+      height: 20px;
+      border-bottom: 2px solid #2e2e2e; }
+      div.content div.tbl table thead tr th {
+        font-weight: normal;
+        padding: 0 5px; }
+    div.content div.tbl table tr a:hover {
+      color: #5d5d5d !important; }
+    div.content div.tbl table tr:hover {
+      background-color: #eeeeee; }
+    div.content div.tbl table td {
+      border: 1px solid #e0e0e0;
+      text-align: left;
+      padding: 0 5px;
+      line-height: 25px; }
+    div.content div.tbl table td.number {
+      text-align: right; }
+    div.content div.tbl table td.center {
+      text-align: center; }
+
+.simple_form {
+  float: left; }
+  .simple_form label, .simple_form .nested_fields_label {
+    float: left;
+    width: 130px;
+    text-align: right;
+    margin-right: 10px; }
+  .simple_form .nested_fields_label {
+    font-weight: bold; }
+  .simple_form div.input {
+    margin-bottom: 10px;
+    min-height: 30px; }
+    .simple_form div.input input, .simple_form div.input textarea {
+      border: 1px solid #e0e0e0; }
+    .simple_form div.input select, .simple_form div.input input {
+      min-width: 230px; }
+    .simple_form div.input input[type='checkbox'] {
+      min-width: 1px; }
+  .simple_form div.boolean, .simple_form input[type='submit'] {
+    margin-left: 140px; }
+  .simple_form div.boolean label {
+    float: none;
+    margin: 0; }
+  .simple_form .check_boxes div {
+    float: right;
+    margin-right: 5px; }
+    .simple_form .check_boxes div label {
+      width: 100px; }
+  .simple_form div.nested_fields_actions {
+    height: 30px; }
+  .simple_form div.nested_fields div.fields {
+    clear: right; }
+    .simple_form div.nested_fields div.fields div.inline_fields {
+      display: inline; }
+    .simple_form div.nested_fields div.fields div.fields_content {
+      border: 1px solid red;
+      display: inline-block;
+      float: left; }
+  .simple_form .field_with_errors {
+    background: none;
+    color: red; }
+
+div.spoiler {
+  border: 1px solid green;
+  background-color: #eeeeee;
+  width: 100%; }
+  div.spoiler span.caption {
+    display: block;
+    padding-left: 20px;
+    width: 100%; }
+  div.spoiler .content {
+    display: none;
+    border: 1px solid #cccccc;
+    background-color: white;
+    border: 1px solid blue; }
+
+div.actions {
+  float: left;
+  clear: left; }
+
+.info div {
+  margin-bottom: 10px;
+  whitespace: nowrap;
+  clear: both; }
+  .info div span.label {
+    float: left;
+    clear: right;
+    width: 160px; }
+    .info div span.label:after {
+      content: ": "; }
+
+.action {
+  text-indent: -9999px;
+  min-width: 16px;
+  height: 16px;
+  display: inline-block;
+  vertical-align: middle;
+  white-space: nowrap; }
+  .action:hover {
+    background: none;
+    color: black !important; }
+  .action.disabled {
+    opacity: 0.3; }
+  .action.with_text {
+    text-indent: 0 !important;
+    text-decoration: none;
+    padding-left: 20px;
+    vertical-align: top; }
+  .action.add {
+    background: url("/images/icons/add.png") no-repeat; }
+  .action.back {
+    background: url("/images/icons/back.png") no-repeat; }
+  .action.edit {
+    background: url("/images/icons/edit.png") no-repeat; }
+  .action.delete {
+    background: url("/images/icons/delete.png") no-repeat; }
+  .action.show {
+    background: url("/images/icons/info.png") no-repeat; }
+  .action.download {
+    background: url("/images/icons/download.png") no-repeat; }
+  .action.block {
+    display: block; }
+  .action.inline {
+    float: left; }
+
+span.flag {
+  width: 16px;
+  height: 16px;
+  display: inline-block;
+  vertical-align: middle; }
+  span.flag.true {
+    background: url("/images/icons/true.png"); }
+  span.flag.false {
+    background: url("/images/icons/false.png"); }

@@ -1,0 +1,171 @@
+$icons_path: unquote('/images/icons/')
+
+body
+  background-color: #FFF
+  margin: 0
+  padding: 0
+  width: 100%
+  height: 100%
+  font-family: arial, verdana
+  font-size: 10pt
+
+a
+  color: #5D5D5D
+  text-decoration: none
+  &:hover
+    color: #AAA !important
+
+div.pagination a:hover
+  color: #000 !important
+
+div.content
+  padding: 20px
+  h2
+    color: #222
+  h3
+    padding-left: 20px
+    color: #555
+    font-style: italic
+  div.tbl table
+    border-collapse: collapse
+    border: 2px solid #2e2e2e
+    border-spacing: 0
+    width: 100%
+    thead
+      tr
+        height: 20px
+        border-bottom: 2px solid #2e2e2e
+        th
+          font-weight: normal
+          padding: 0 5px
+    tr
+      a
+        &:hover
+          color: #5D5D5D !important
+      &:hover
+        background-color: #EEE
+    td
+      border: 1px solid #E0E0E0
+      text-align: left
+      padding: 0 5px
+      line-height: 25px
+    td.number
+      text-align: right
+    td.center
+      text-align: center
+
+.simple_form
+  float: left
+  label, .nested_fields_label
+    float: left
+    width: 130px
+    text-align: right
+    margin-right: 10px
+  .nested_fields_label
+    font-weight: bold
+  div.input
+    margin-bottom: 10px
+    min-height: 30px
+    input, textarea
+      border: 1px solid #E0E0E0
+    select, input
+      min-width: 230px
+    input[type='checkbox']
+      min-width: 1px
+  div.boolean, input[type='submit']
+    margin-left: 140px
+  div.boolean label
+    float: none
+    margin: 0
+  .check_boxes div
+    float: right
+    margin-right: 5px
+    label
+      width: 100px
+  div.nested_fields_actions
+    height: 30px
+  div.nested_fields
+    div.fields
+      clear: right
+      div.inline_fields
+        display: inline
+      div.fields_content
+        border: 1px solid red
+        display: inline-block
+        float: left
+  .field_with_errors
+    background: none
+    color: red
+
+div.spoiler
+  border: 1px solid green
+  background-color: #EEE
+  width: 100%
+  span.caption
+    display: block
+    padding-left: 20px
+    width: 100%
+  .content
+    display: none
+    border: 1px solid #CCC
+    background-color: #FFF
+    border: 1px solid blue
+
+div.actions
+  float: left
+  clear: left
+
+.info div
+  margin-bottom: 10px
+  whitespace: nowrap
+  clear: both
+  span.label
+    float: left
+    clear: right
+    width: 160px
+    &:after
+      content: ": "
+
+.action
+  text-indent: -9999px
+  min-width: 16px
+  height: 16px
+  display: inline-block
+  vertical-align: middle
+  white-space: nowrap
+  &:hover
+    background: none
+    color: #000 !important
+  &.disabled
+    opacity: 0.3
+  &.with_text
+    text-indent: 0 !important
+    text-decoration: none
+    padding-left: 20px
+    vertical-align: top
+  &.add
+    background: url("#{$icons_path}add.png") no-repeat
+  &.back
+    background: url("#{$icons_path}back.png") no-repeat
+  &.edit
+    background: url("#{$icons_path}edit.png") no-repeat
+  &.delete
+    background: url("#{$icons_path}delete.png") no-repeat
+  &.show
+    background: url("#{$icons_path}info.png") no-repeat
+  &.download
+    background: url("#{$icons_path}download.png") no-repeat
+  &.block
+    display: block
+  &.inline
+    float: left
+
+span.flag
+  width: 16px
+  height: 16px
+  display: inline-block
+  vertical-align: middle
+  &.true
+    background: url("#{$icons_path}true.png")
+  &.false
+    background: url("#{$icons_path}false.png")

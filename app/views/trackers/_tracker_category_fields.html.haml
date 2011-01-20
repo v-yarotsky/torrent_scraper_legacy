@@ -1,0 +1,14 @@
+%div.fields
+  %div.fields_content
+    %div.inline_fields
+      = f.association :media_category, :wrapper_tag => :span
+      or create new
+      = f.input :new_media_category_name, :wrapper_tag => :span, :label => false, :input_html => { :size => 21 }
+    = f.input :name_on_tracker
+    %div.spoiler
+      %span.caption Additional settings
+      %div.content
+        = f.input :allowed_keywords
+        = f.input :disallowed_keywords
+        = f.input :min_seeders
+  = link_to_remove_fields f

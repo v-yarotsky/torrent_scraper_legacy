@@ -1,0 +1,7 @@
+%tr
+  %td= link_to torrent.title, torrent.tracker_link
+  %td= torrent.seeders
+  %td= number_to_human_size torrent.size
+  %td
+    = link_to "Download!", download_torrent_path(torrent.id), :remote => true, :class => "action download"
+    = link_to_delete torrent

@@ -1,0 +1,20 @@
+- @trackers.includes(:torrents).each do |tracker|
+  %div.tracker.spoiler
+    %span.caption
+      %h2= tracker.name
+    %div.content
+      %p= "No torrents yet..." unless tracker.torrents.fresh.pending.any?
+      - MediaCategory.all.each do |category|
+        - torrents = category.torrents.fresh.for_tracker(tracker).pending
+        - next unless torrents.any?
+        %h3= category.name
+        %div.tbl
+          %table
+            %thead
+              %tr
+                %th= "Title"
+                %th= "Seeders"
+                %th= "Size"
+                %th
+            %tbody
+              = render :partial => "torrent", :collection => torrents
