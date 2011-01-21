@@ -66,7 +66,7 @@ class TorrentScraperBase
   def download_torrent!(torrent)
     filename = ""
     process do
-      dir = File.join(Rails.root, 'public', 'torrents', @tracker.name)
+      dir = File.join(Rails.root, 'public', 'torrents')
       FileUtils.mkdir_p(dir)
       torrent_file = @agent.get(torrent.link)
       filename = "#{dir}/#{torrent_file.filename.gsub /^"|"$/, ''}"
