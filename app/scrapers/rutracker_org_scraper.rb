@@ -26,7 +26,8 @@ class RutrackerOrgScraper < TorrentScraperBase
     @page = @page.form_with(:action => 'tracker.php') do |form|
       @tracker.tracker_categories.each do |category|
         Rails.logger.debug("\tCategory id: #{category.id}, name_on_tracker: #{category.name_on_tracker}")
-        form.field('f[]').options.find { |option| option.text.include? category.name_on_tracker }.tick
+        option = form.field('f[]').options.find { |option| option.text.include? category.name_on_tracker }
+        option.tick if option.present?
       end
       form.field('tm').option_with(:text => /сегодня/i).select
       form.checkbox('oop').check #поиск по торрентам с сидерами
