@@ -1,6 +1,6 @@
 #encoding: utf-8
-class XbttScraper
-  include TorrentScraper
+module XbttScraper
+  include TrackerScraper
 
   def initialize
     super

@@ -1,5 +1,6 @@
 #encoding: utf-8
-class TorrentsByScraper < XbttScraper
+class TorrentsByScraper
+  include XbttScraper
 
   def login_form_criteria
     { :action => "./login.php" }

@@ -1,6 +1,6 @@
 #encoding: utf-8
-
-module TorrentScraper
+require 'mechanize'
+module TrackerScraper
 
   def initialize
     tracker_name = self.class.name.gsub(/Scraper/,'').underscore.gsub('_','.').capitalize

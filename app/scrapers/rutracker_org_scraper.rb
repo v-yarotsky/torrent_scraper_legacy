@@ -1,5 +1,6 @@
 #encoding: utf-8
-class RutrackerOrgScraper < XbttScraper
+class RutrackerOrgScraper
+  include XbttScraper
 
   def login_form_criteria
     { :action => "http://login.rutracker.org/forum/login.php" }
