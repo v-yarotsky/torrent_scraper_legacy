@@ -44,9 +44,10 @@ namespace :deploy do
   task :restart, :roles => :web, :except => { :no_release => true } do
     run "#{try_sudo} touch #{File.join(current_path,'tmp','restart.txt')}"
   end
-  task :reseed, :roles => :web, :except => { :no_release => true } do
-    run "RAILS_ENV=\"production\" cd #{deploy_to}/current && rake db:migrate:reset && rake db:seed"
-  end
+end
+
+task :reseed do
+  run "cd #{deploy_to}/current && rake db:migrate:reset && rake db:seed"
 end
 
 namespace :bundle do
