@@ -1,44 +1,24 @@
 set :application, "TorrentScraper"
+role :web, "192.168.1.4"
+
+set :user, "gor"
+set :use_sudo, false
 
 set :scm, :git
 set :deploy_via, :remote_cache
 set :scm_user, "gor"
 set :repository, "git://gitorious.org/scraper/scraper.git"
 
-set :restart_method, :nginx
-
-role :web, "192.168.1.4"
+set :deploy_to, "/home/#{user}/#{application}"
 
 default_run_options[:pty] = true
 ssh_options[:port] = 7465
+set :restart_method, :nginx
 set :rails_env, "production"
+set :rake, "$GEM_HOME/bin/rake"
+set :bundle, "$GEM_HOME/bin/bundle"
 
-set :user, "gor"
-set :use_sudo, false
-
-set :deploy_to, "/home/#{user}/#{application}"
-
-# If you are using Passenger mod_rails uncomment this:
-# if you're still using the script/reapear helper you will need
-# these http://github.com/rails/irs_process_scripts
-
-# namespace :deploy do
-#   task :start do ; end
-#   task :stop do ; end
-#   task :restart, :roles => :app, :except => { :no_release => true } do
-#     run "#{try_sudo} touch #{File.join(current_path,'tmp','restart.txt')}"
-#   end
-# end
-#
-
-namespace :passenger do
-  desc "Restart Application"
-  task :restart do
-    run "touch #{current_path}/tmp/restart.txt"
-  end
-end
-
-after :deploy, "passenger:restart"
+after :deploy, "deploy:restart"
 
 namespace :deploy do
   task :restart, :roles => :web, :except => { :no_release => true } do
@@ -47,11 +27,11 @@ namespace :deploy do
 end
 
 task :reseed do
-  run "cd #{deploy_to}/current && rake db:migrate:reset && rake db:seed"
+  run "cd #{deploy_to}/current && #{rake} db:migrate:reset && #{rake} db:seed"
 end
 
 namespace :bundle do
   task :install, :roles => :web, :except => { :no_release => true } do
-    run "cd #{deploy_to}/current && bundle install"
+    run "cd #{deploy_to}/current && #{bundle} install"
   end
 end
