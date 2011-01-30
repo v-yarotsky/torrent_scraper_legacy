@@ -1,9 +1,6 @@
 #encoding: utf-8
-require 'mechanize'
 
-class TorrentScraperBase
- 
-  attr_accessor :page
+module TorrentScraper
 
   def initialize
     tracker_name = self.class.name.gsub(/Scraper/,'').underscore.gsub('_','.').capitalize
@@ -28,10 +25,10 @@ class TorrentScraperBase
   end
 
   def visit_tracker
-    @page = @agent.get(:url => @tracker.url, :headers => { 'Accept-Charset' => 'utf-8' })
+    @agent.get(:url => @tracker.url, :headers => { 'Accept-Charset' => 'utf-8' })
     Rails.logger.warn("Encountered following parse errors:\n\t#{@agent.page.parser.errors.map(&:to_s).join(";\n\t")}")
   end
-  
+
   def login
   end
 
@@ -56,8 +53,8 @@ class TorrentScraperBase
     category = torrent_attributes[:tracker_category]
     title = torrent_attributes[:title]
     return false if torrent_attributes[:seeders] < category.min_seeders
-    allowed_keywords = category.allowed_keywords.split(/;/).map(&:strip).join("|")
-    return false unless title =~ /#{allowed_keywords}/i
+    required_keywords = category.allowed_keywords.split(/;/).map(&:strip).join("|")
+    return false unless title =~ /#{required_keywords}/i
     disallowed_keywords = category.disallowed_keywords.split(/;/).map(&:strip).join("|")
     return false if disallowed_keywords.present? and title =~ /#{disallowed_keywords}/i
     true
@@ -74,6 +71,10 @@ class TorrentScraperBase
     end
     Rails.logger.info("Torrent downloaded to: #{filename}")
     filename
+  end
+
+  def page
+    @agent.page
   end
 
 end
