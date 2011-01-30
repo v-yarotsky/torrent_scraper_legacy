@@ -48,3 +48,9 @@ namespace :deploy do
     run "RAILS_ENV=\"production\" cd #{deploy_to}/current && rake db:migrate:reset && rake db:seed"
   end
 end
+
+namespace :bundle do
+  task :install, :roles => :web, :except => { :no_release => true } do
+    run "cd #{deploy_to}/current && bundle install"
+  end
+end
