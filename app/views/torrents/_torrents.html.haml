@@ -3,7 +3,8 @@
     %span.caption
       %h2= tracker.name
     %div.content
-      %p= "No torrents yet..." if @torrents.for_tracker(tracker).empty?
+      - if @torrents.for_tracker(tracker).empty?
+        %p= "No torrents yet..."
       - tracker.media_categories.each do |category|
         - next if @torrents.for_tracker(tracker).for_category(category).empty?
         %h3= category.name

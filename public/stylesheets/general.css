@@ -95,7 +95,8 @@ div.spoiler {
   border: 1px solid #cccccc;
   background-color: #eeeeee;
   width: 100%;
-  margin-bottom: 5px; }
+  margin-bottom: 5px;
+  overflow: hidden; }
   div.spoiler span.caption {
     display: inline-block;
     width: 100%;
