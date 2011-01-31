@@ -1,4 +1,8 @@
 $icons_path: unquote('/images/icons/')
+$outer_border: #CBCBCB
+$inner_border: #E0E0E0
+$header: #F5F5F5
+$tr_hover: #EFE
 
 body
   background-color: #FFF
@@ -20,6 +24,9 @@ div.pagination a:hover
 
 div#wrapper
   padding: 20px
+  h1
+    color: #333
+    border-bottom: 1px dotted #CCC
   div.content
     h2
       color: #222
@@ -29,24 +36,29 @@ div#wrapper
       font-style: italic
     div.tbl table
       border-collapse: collapse
-      border: 2px solid #2e2e2e
+      border: 2px solid $outer_border
       border-spacing: 0
       width: 100%
       thead
         tr
-          height: 20px
-          border-bottom: 2px solid #2e2e2e
+          height: 25px
+          border-bottom: 2px solid $outer_border
+          background-color: $header
+          &:hover
+            background-color: $header
           th
-            font-weight: normal
+            font-weight: bold
+            color: #333
             padding: 0 5px
+            border: 1px solid $outer_border
       tr
         a
           &:hover
             color: #5D5D5D !important
         &:hover
-          background-color: #EEE
+          background-color: $tr_hover
       td
-        border: 1px solid #E0E0E0
+        border: 1px solid $inner_border
         text-align: left
         padding: 0 5px
         line-height: 25px
@@ -104,17 +116,15 @@ div.spoiler
   width: 100%
   margin-bottom: 5px
   overflow: hidden
-  span.caption
-    display: inline-block
-    width: 100%
+  .caption
+    display: block
+    line-height: 24px
     border-bottom: 1px solid #CCC
-    h2
-      padding-left: 20px
+    padding-left: 20px
   .content
     padding: 10px
     display: none
     background-color: #FFF
-    width: 100%
 
 div.actions
   float: left
@@ -164,6 +174,7 @@ div.actions
     display: block
   &.inline
     float: left
+  &.remote
 
 span.flag
   width: 16px
@@ -186,11 +197,23 @@ span.flag
   opacity: .7
   filter: alpha(opacity=70)
   z-index: 2000
+  img
+    display: block
+    position: absolute
+    top: 50%
+    left: 50%
+    margin-top: -35px
+    margin-left: -35px
 
-#loading img
-  display: block
-  position: absolute
-  top: 50%
-  left: 50%
-  margin-top: -35px
-  margin-left: -35px
+#navigation
+  border: 2px solid #BBBBBF
+  background-color: #F5F9FC
+  height: 30px
+  line-height: 30px
+  margin-bottom: 30px
+  a
+    display: block
+    float: left
+    height: 30px
+    border-right: 1px dashed #BBBBBF
+    padding: 0 10px

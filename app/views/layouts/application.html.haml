@@ -8,7 +8,9 @@
     = csrf_meta_tag
   %body
     %div#wrapper
-      = render "common/nav"
+      %div#navigation
+        = render "common/nav"
+        = yield :navigation
       = yield
       %div#loading
         %img{ :src => "/images/loading.gif", :alt => "Loading..." }

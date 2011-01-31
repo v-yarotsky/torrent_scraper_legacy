@@ -18,6 +18,9 @@ div.pagination a:hover {
 
 div#wrapper {
   padding: 20px; }
+  div#wrapper h1 {
+    color: #333333;
+    border-bottom: 1px dotted #cccccc; }
   div#wrapper div.content h2 {
     color: #222222; }
   div#wrapper div.content h3 {
@@ -26,19 +29,24 @@ div#wrapper {
     font-style: italic; }
   div#wrapper div.content div.tbl table {
     border-collapse: collapse;
-    border: 2px solid #2e2e2e;
+    border: 2px solid #cbcbcb;
     border-spacing: 0;
     width: 100%; }
     div#wrapper div.content div.tbl table thead tr {
-      height: 20px;
-      border-bottom: 2px solid #2e2e2e; }
+      height: 25px;
+      border-bottom: 2px solid #cbcbcb;
+      background-color: #f5f5f5; }
+      div#wrapper div.content div.tbl table thead tr:hover {
+        background-color: #f5f5f5; }
       div#wrapper div.content div.tbl table thead tr th {
-        font-weight: normal;
-        padding: 0 5px; }
+        font-weight: bold;
+        color: #333333;
+        padding: 0 5px;
+        border: 1px solid #cbcbcb; }
     div#wrapper div.content div.tbl table tr a:hover {
       color: #5d5d5d !important; }
     div#wrapper div.content div.tbl table tr:hover {
-      background-color: #eeeeee; }
+      background-color: #eeffee; }
     div#wrapper div.content div.tbl table td {
       border: 1px solid #e0e0e0;
       text-align: left;
@@ -97,17 +105,15 @@ div.spoiler {
   width: 100%;
   margin-bottom: 5px;
   overflow: hidden; }
-  div.spoiler span.caption {
-    display: inline-block;
-    width: 100%;
-    border-bottom: 1px solid #cccccc; }
-    div.spoiler span.caption h2 {
-      padding-left: 20px; }
+  div.spoiler .caption {
+    display: block;
+    line-height: 24px;
+    border-bottom: 1px solid #cccccc;
+    padding-left: 20px; }
   div.spoiler .content {
     padding: 10px;
     display: none;
-    background-color: white;
-    width: 100%; }
+    background-color: white; }
 
 div.actions {
   float: left;
@@ -179,11 +185,23 @@ span.flag {
   opacity: 0.7;
   filter: alpha(opacity=70);
   z-index: 2000; }
+  #loading img {
+    display: block;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-top: -35px;
+    margin-left: -35px; }
 
-#loading img {
-  display: block;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  margin-top: -35px;
-  margin-left: -35px; }
+#navigation {
+  border: 2px solid #bbbbbf;
+  background-color: #f5f9fc;
+  height: 30px;
+  line-height: 30px;
+  margin-bottom: 30px; }
+  #navigation a {
+    display: block;
+    float: left;
+    height: 30px;
+    border-right: 1px dashed #bbbbbf;
+    padding: 0 10px; }

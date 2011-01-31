@@ -28,6 +28,16 @@ var toggleSpoiler = function() {
     });
 };
 
-$(document).ready(function(){
-    $("div.spoiler span.caption").live("click", toggleSpoiler);
+var initializeTrackerSpoilers = function() {
+  $("div.spoiler").each(function() {
+    var spoiler = $(this);
+    if ($.cookie(spoiler.attr("id") + "_visible") == "true") {
+      spoiler.find("div.caption").click();
+    }
+  });
+};
+
+$(function(){
+    $(".spoiler .caption").live("click", toggleSpoiler);
+    $(".remote.action").live("ajax:beforeSend", showLoadingIcon).live("ajax:complete", hideLoadingIcon);
 });

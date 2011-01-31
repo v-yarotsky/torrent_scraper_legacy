@@ -6,7 +6,7 @@ class BasicFilter
   end
 
   def table_name(relation)
-    relation.klass.name.underscore.pluralize
+    relation.klass.name.tableize
   end
 
 end

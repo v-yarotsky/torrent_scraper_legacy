@@ -1,7 +1,7 @@
 - trackers.each do |tracker|
   %div{ :id => "tracker_#{tracker.id}_spoiler", :class => "tracker spoiler" }
-    %span.caption
-      %h2= tracker.name
+    %div.caption
+      = tracker.name
     %div.content
       - if @torrents.for_tracker(tracker).empty?
         %p= "No torrents yet..."
@@ -19,11 +19,4 @@
             %tbody
               = render :partial => "torrent", :collection => @torrents.for_tracker(tracker).for_category(category)
 :javascript
-  $(document).ready(function() {
-    $("div.spoiler").each(function() {
-      var spoiler = $(this);
-      if ($.cookie(spoiler.attr("id") + "_visible") == "true") {
-        spoiler.find("span.caption").click();
-      }
-    });
-  });
+  $(initializeTrackerSpoilers);
