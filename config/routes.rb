@@ -3,9 +3,9 @@ TorrentScraper::Application.routes.draw do
 
   root :to => "torrents#index"
   match "torrents/:id/download" => "torrents#download", :as => :download_torrent
-  match "torrents/:id" => "torrents#show", :as => :torrent
   match "torrents/:id/destroy" => "torrents#destroy", :as => :torrent, :via => :delete
   match "torrents" => "torrents#index"
+  match "torrents/:tracker_id/:category_id" => "torrents#sort", :as => :sort_torrents
 
   resources :trackers
 

@@ -220,3 +220,10 @@ span.flag
     height: 30px
     border-right: 1px dashed #BBBBBF
     padding: 0 10px
+
+th.sortable.current
+  font-style: italic
+  &[data-order='asc']:after
+    content: '⇡'
+  &[data-order='desc']:after
+    content: '⇣'

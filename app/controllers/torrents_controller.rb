@@ -10,6 +10,17 @@ class TorrentsController < ApplicationController
     initialize_torrents
   end
 
+  def sort
+    respond_to do |format|
+      format.js do
+        initialize_torrents
+        Rails.logger.debug("*"*80)
+        Rails.logger.debug(@torrents.order("torrents.#{params[:column]} #{params[:order]}").to_sql)
+        Rails.logger.debug("*"*80)
+      end
+    end
+  end
+
   def destroy
     @torrent.mark_as_deleted!
     initialize_torrents

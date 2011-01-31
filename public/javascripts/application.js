@@ -40,4 +40,21 @@ var initializeTrackerSpoilers = function() {
 $(function(){
     $(".spoiler .caption").live("click", toggleSpoiler);
     $(".remote.action").live("ajax:beforeSend", showLoadingIcon).live("ajax:complete", hideLoadingIcon);
+    $("th.sortable").live("click", function() {
+        var data_column = $(this).attr("data-column");
+        var data_order = $(this).attr("data-order") || "asc";
+        var data_url = $(this).closest("table").attr("url");
+
+        $(this).attr("data-order", data_order == "asc" ? "desc" : "asc");
+        $(this).siblings("th.sortable").removeClass("current");
+        $(this).addClass("current");
+
+        $.ajax({
+            url: data_url,
+            data: ({ column: data_column, order: data_order, format: "js" }),
+            loading: showLoadingIcon,
+            complete: hideLoadingIcon
+          });
+        //alert(column + " " + tracker+ " " + category);
+    });
 });
