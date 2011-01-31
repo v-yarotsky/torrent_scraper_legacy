@@ -22,7 +22,7 @@ class TorrentsController < ApplicationController
   end
 
   def initialize_torrents
-    @torrents = Filter.instance.filter(Torrent.scoped, params)
+    @torrents = Filter.instance.filter(Torrent.scoped, params || { "date" => "today", "state" => "pending" })
     Rails.logger.debug("TORRENTS: #{@torrents.inspect}")
   end
 
