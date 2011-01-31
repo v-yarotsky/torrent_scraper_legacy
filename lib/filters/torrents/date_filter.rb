@@ -5,14 +5,14 @@ class DateFilter < BasicFilter
     num, method = filter_name.match(/^last\s(\d+)\s(\w+)$/).captures
     code = %Q{
       def #{filter_name.gsub(' ', '_').underscore}(relation)
-        relation.where("\#{table_name(relation)}.updated_at > ?", Time.now.utc.beginning_of_day - #{num}.pred.#{method})
+        relation.where("\#{table_name(relation)}.updated_at < ?", Time.now.utc.beginning_of_day - #{num}.pred.#{method})
       end
     }
     class_eval(code)
   end
 
   def today(relation)
-    relation.where("#{table_name(relation)}.updated_at > ?", Time.now.utc.beginning_of_day)
+    relation.where("#{table_name(relation)}.updated_at < ?", Time.now.utc.beginning_of_day)
   end
 
   def all_time(relation)
