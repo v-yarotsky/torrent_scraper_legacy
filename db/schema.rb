@@ -24,7 +24,7 @@ ActiveRecord::Schema.define(:version => 20110119201131) do
     t.integer  "seeders"
     t.integer  "size"
     t.string   "tracker_link"
-    t.boolean  "download"
+    t.boolean  "downloaded"
     t.integer  "tracker_category_id"
     t.datetime "created_at"
     t.datetime "updated_at"

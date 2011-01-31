@@ -10,11 +10,8 @@ class Torrent < ActiveRecord::Base
   @@seeders_limit = 5
   cattr_accessor :seeders_limit
 
-  scope :fresh, where("torrents.updated_at > ?", Time.now.utc.beginning_of_day)
   scope :for_tracker, ->(the_tracker) { joins(:tracker_category).where("tracker_categories.tracker_id = ?", the_tracker.id) }
-  scope :pending, where("download IS NULL")
-
-  default_scope where("deleted IS NULL")
+  scope :for_category, ->(category) { joins(:tracker_category).where("tracker_categories.media_category_id = ?", category) }
 
   def check_torrent
     errors.add(:title, "is low-quality!") if title.present? and title =~ /camrip|telesynch/i

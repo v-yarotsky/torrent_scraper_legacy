@@ -6,7 +6,7 @@ class CreateTorrents < ActiveRecord::Migration
       t.integer :seeders
       t.integer :size
       t.string :tracker_link
-      t.boolean :download
+      t.boolean :downloaded
       t.integer :tracker_category_id
 
       t.timestamps

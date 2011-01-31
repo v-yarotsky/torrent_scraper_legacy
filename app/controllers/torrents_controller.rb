@@ -1,22 +1,29 @@
 class TorrentsController < ApplicationController
+  before_filter :initialize_torrent, :only => [:download, :destroy]
 
   def index
-    @trackers = Tracker.scoped
-  end
-
-  def show
+    initialize_torrents
   end
 
   def download
-    @torrent = Torrent.find(params[:id])
     @torrent.download!
-    @trackers = Tracker.scoped
+    initialize_torrents
   end
 
   def destroy
-    torrent = Torrent.find(params[:id])
-    torrent.mark_as_deleted! if torrent
-    @trackers = Tracker.scoped
+    @torrent.mark_as_deleted!
+    initialize_torrents
+  end
+
+  protected
+
+  def initialize_torrent
+    @torrent = Torrent.find_by_id(params[:id])
+  end
+
+  def initialize_torrents
+    @torrents = Filter.instance.filter(Torrent.scoped, params)
+    Rails.logger.debug("TORRENTS: #{@torrents.inspect}")
   end
 
 end

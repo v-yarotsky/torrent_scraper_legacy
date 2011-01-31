@@ -4,7 +4,11 @@
     %title TorrentScraper
     = stylesheet_link_tag :all
     = javascript_include_tag :defaults
+    = javascript_include_tag "jquery.cookie.js"
     = csrf_meta_tag
   %body
-    = render "common/nav"
-    = yield
+    %div#wrapper
+      = render "common/nav"
+      = yield
+      %div#loading
+        %img{ :src => "/images/loading.gif", :alt => "Loading..." }
