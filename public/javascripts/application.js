@@ -37,24 +37,37 @@ var initializeTrackerSpoilers = function() {
   });
 };
 
+var filtersData = function() {
+  var filters = "";
+  $(".filter").each(function() {
+    var filter = $(this);
+    filters += "&" + filter.attr("data-name") + "=" + filter.val();
+  });
+  return filters;
+};
+
 $(function(){
     $(".spoiler .caption").live("click", toggleSpoiler);
     $(".remote.action").live("ajax:beforeSend", showLoadingIcon).live("ajax:complete", hideLoadingIcon);
+
     $("th.sortable").live("click", function() {
-        var data_column = $(this).attr("data-column");
-        var data_order = $(this).attr("data-order") || "asc";
-        var data_url = $(this).closest("table").attr("url");
+        var parent = $(this).closest(".media_category");
+        var url = parent.attr("data-url");
+        var column = $(this).attr("data-column");
+        var order = $(this).attr("data-order") || "asc";
+        $.get(url, filtersData() + "&column=" + column + "&order=" + order + "&format=js");
+    });
 
-        $(this).attr("data-order", data_order == "asc" ? "desc" : "asc");
-        $(this).siblings("th.sortable").removeClass("current");
-        $(this).addClass("current");
-
+    $(function() {
+      $("select.filter").change(function() {
+        var parent = $(this).parent();
+        var url = parent.attr("data-url");
         $.ajax({
-            url: data_url,
-            data: ({ column: data_column, order: data_order, format: "js" }),
-            loading: showLoadingIcon,
-            complete: hideLoadingIcon
-          });
-        //alert(column + " " + tracker+ " " + category);
+          url: url,
+          data: (filtersData() + "&format=js"),
+          beforeSend: showLoadingIcon,
+          complete: hideLoadingIcon
+        });
+      });
     });
 });

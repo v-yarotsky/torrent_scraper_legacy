@@ -9,7 +9,7 @@ module TorrentsHelper
     result = ""
     begin
       available_filters = eval("#{filter_name.classify}::AVAILABLE_FILTERS")
-      result = select_tag filter_name, options_for_select(available_filters), :id => filter_name, :class => "filter"
+      result = select_tag filter_name, options_for_select(available_filters), :id => filter_name, :class => "filter", "data-name" => name
     rescue NameError
       Rails.logger.warn("Retrieve available filter values failed")
     end

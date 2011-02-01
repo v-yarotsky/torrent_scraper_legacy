@@ -1,23 +1,8 @@
 %h1= "Torrents"
-%div.filter
+%div{ :id => "filters", "data-url" => torrents_path }
   %span.label= "Filter:"
   = filter_select :date
   = filter_select :state
 &nbsp;
 %div#torrents.content
   = render "torrents"
-
-:javascript
-  $(function() {
-    $("select.filter").change(function() {
-      showLoadingIcon();
-      var date_filter = $("#date_filter.filter").val();
-      var state_filter = $("#state_filter.filter").val();
-      $.ajax({
-        url: "#{torrents_path}",
-        data: ({ date: date_filter, state: state_filter, format: "js" }),
-        loading: showLoadingIcon,
-        complete: hideLoadingIcon
-      });
-    });
-  });

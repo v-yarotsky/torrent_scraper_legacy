@@ -1,0 +1,3 @@
+var targetDiv = $(".media_category[data-url='<%= sort_torrents_path(tracker.id, media_category.id)%>']");
+targetDiv.html("<%= escape_javascript(render "media_category", :tracker => tracker, :media_category => media_category) %>");
+targetDiv.find("table th.sortable[data-column='<%= column %>']").addClass("current").attr("data-order", "<%= order == "asc" ? "desc" : "asc" %>");

@@ -11,14 +11,10 @@ class TorrentsController < ApplicationController
   end
 
   def sort
-    respond_to do |format|
-      format.js do
-        initialize_torrents
-        Rails.logger.debug("*"*80)
-        Rails.logger.debug(@torrents.order("torrents.#{params[:column]} #{params[:order]}").to_sql)
-        Rails.logger.debug("*"*80)
-      end
-    end
+    media_category = MediaCategory.find_by_id(params[:media_category_id])
+    tracker = Tracker.find_by_id(params[:tracker_id])
+    @torrents = initialize_torrents.for_tracker(tracker).for_category(media_category).order("torrents.#{params[:column]} #{params[:order]}")
+    render :partial => "torrents/sort", :locals => params.merge(:tracker => tracker, :media_category => media_category)
   end
 
   def destroy
