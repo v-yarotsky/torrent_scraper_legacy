@@ -1,8 +1,8 @@
 - if @torrents.for_tracker(tracker).for_category(media_category).any?
-  %div{ "data-url" => sort_torrents_path(tracker.id, media_category.id), :class => "media_category" }
+  %div.media_category
     %h3= media_category.name
     %div.tbl
-      %table
+      %table{ "data-url" => sort_torrents_path(tracker.id, media_category.id) }
         %thead
           %tr
             = sortable_column_header :title
@@ -10,4 +10,4 @@
             = sortable_column_header :size
             = non_sortable_column_header
         %tbody
-          = render :partial => "torrent", :collection => @torrents.for_tracker(tracker).for_category(media_category)
+          = render @torrents.for_tracker(tracker).for_category(media_category)

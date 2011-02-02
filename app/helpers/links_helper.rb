@@ -1,13 +1,13 @@
 module LinksHelper
 
   def link_to_download(torrent)
-    link_to "Download!", download_torrent_path(torrent.id), :remote => true, :class => "remote action download"
+    link_to "Download!", download_torrent_path(torrent.id), :class => "remote action download"
   end
 
   def link_to_delete(object)
     method = "#{object.class.name.underscore}_path"
     url = send(method, object.id)
-    link_to "Delete", url, :remote => true, :method => :delete, :confirm => "Are you sure?", :class => "remote action delete"
+    link_to "Delete", url, :request => :delete, :confirm => "Are you sure?", :class => "remote action delete"
   end
 
   def link_to_add(object)

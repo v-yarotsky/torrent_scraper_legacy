@@ -14,12 +14,19 @@ class TorrentsController < ApplicationController
     media_category = MediaCategory.find_by_id(params[:media_category_id])
     tracker = Tracker.find_by_id(params[:tracker_id])
     @torrents = initialize_torrents.for_tracker(tracker).for_category(media_category).order("torrents.#{params[:column]} #{params[:order]}")
-    render :partial => "torrents/sort", :locals => params.merge(:tracker => tracker, :media_category => media_category)
+    respond_to do |format|
+      format.js { render :partial => "sort", :locals => { :tracker => tracker, :media_category => media_category } }
+      format.html { render :index }
+    end
   end
 
   def destroy
     @torrent.mark_as_deleted!
     initialize_torrents
+    respond_to do |format|
+      format.js
+      format.html { render :index }
+    end
   end
 
   protected

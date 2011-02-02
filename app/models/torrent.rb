@@ -24,7 +24,7 @@ class Torrent < ActiveRecord::Base
 
   def download!
     tracker.get_scraper.download_torrent!(self)
-    mark_as_deleted!
+    self.update_attributes(:downloaded => true)
   end
 
   def mark_as_deleted!
