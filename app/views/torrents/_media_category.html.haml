@@ -1,7 +1,7 @@
 - if @torrents.for_tracker(tracker).for_category(media_category).any?
-  %div.media_category
-    %h3= media_category.name
-    %div.tbl
+  %div.media_category.spoiler.expanded
+    %h3.caption= media_category.name
+    %div.tbl.content
       %table{ "data-url" => sort_torrents_path(tracker.id, media_category.id) }
         %thead
           %tr

@@ -101,20 +101,27 @@ div#wrapper {
     background: none;
     color: red; }
 
-div.spoiler {
-  border: 1px solid #cccccc;
-  background-color: #eeeeee;
+.spoiler {
   width: 100%;
   margin-bottom: 5px;
   overflow: hidden; }
-  div.spoiler .caption {
+  .spoiler.tracker {
+    border: 1px solid #cccccc;
+    background-color: #eeeeee; }
+  .spoiler div.caption {
     display: block;
     line-height: 24px;
     border-bottom: 1px solid #cccccc;
     padding-left: 20px;
     font-weight: bold;
     color: #333333; }
-  div.spoiler .content {
+  .spoiler h3.caption:before {
+    content: "[+]"; }
+  .spoiler.expanded > h3.caption:before {
+    content: "[-]" !important; }
+  .spoiler.expanded > .content {
+    display: block; }
+  .spoiler .content {
     padding: 10px;
     display: none;
     background-color: white; }

@@ -18,21 +18,20 @@ var hideLoadingIcon = function () {
 };
 
 var toggleSpoiler = function() {
-    var spoiler = $(this).parent();
-    var content = $(this).next(".content");
-    content.slideToggle('fast', function() {
-        if (spoiler.attr("id")) {
-            var visible = content.is(":visible");
-            $.cookie(spoiler.attr("id") + "_visible", visible);
-        }
-    });
+    var caption = $(this);
+    var spoiler = caption.parent().toggleClass("expanded");
+    var content = caption.next(".content");
+    if (spoiler.attr("id")) {
+        var visible = content.is(":visible");
+        $.cookie(spoiler.attr("id") + "_visible", visible);
+    }
 };
 
 var initializeTrackerSpoilers = function() {
   $("div.spoiler").each(function() {
       var spoiler = $(this);
       if ($.cookie(spoiler.attr("id") + "_visible") == "true") {
-          spoiler.find("div.caption").click();
+          spoiler.addClass("expanded");
       }
   });
 };

@@ -111,19 +111,27 @@ div#wrapper
     background: none
     color: red
 
-div.spoiler
-  border: 1px solid #CCC
-  background-color: #EEE
+.spoiler
   width: 100%
   margin-bottom: 5px
   overflow: hidden
-  .caption
+  &.tracker
+    border: 1px solid #CCC
+    background-color: #EEE
+  div.caption
     display: block
     line-height: 24px
     border-bottom: 1px solid #CCC
     padding-left: 20px
     font-weight: bold
     color: #333
+  h3.caption:before
+    content: "[+]"
+  &.expanded
+    & > h3.caption:before
+      content: "[-]" !important
+    & > .content
+      display: block
   .content
     padding: 10px
     display: none
