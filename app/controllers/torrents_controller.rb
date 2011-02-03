@@ -15,7 +15,7 @@ class TorrentsController < ApplicationController
     tracker = Tracker.find_by_id(params[:tracker_id])
     @torrents = initialize_torrents.for_tracker(tracker).for_category(media_category).order("torrents.#{params[:column]} #{params[:order]}")
     respond_to do |format|
-      format.js { render :partial => "sort", :locals => { :tracker => tracker, :media_category => media_category } }
+      format.js { render @torrents, :tracker => tracker }
       format.html { render :index }
     end
   end

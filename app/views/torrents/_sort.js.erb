@@ -1,2 +1,0 @@
-var targetDiv = $("table[data-url='<%= sort_torrents_path(tracker.id, media_category.id) %>']").find("tbody");
-targetDiv.html('<%= escape_javascript(render :partial => "torrent", :collection => @torrents, :locals => { :tracker => tracker }) %>');

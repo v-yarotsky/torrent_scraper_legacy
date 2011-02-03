@@ -64,11 +64,15 @@ var bindRemoteActionLinks = function() {
 var bindSortableHeaders = function() {
     $("th.sortable").live("click", function() {
         var column_header = $(this);
-        var url = column_header.closest("table").attr("data-url");
+        var table = column_header.closest("table");
+
+        var url = table.attr("data-url");
         var column = column_header.attr("data-column");
         var order = column_header.attr("data-order") || "asc";
+
         var data = filtersData() + "&column=" + column + "&order=" + order;
-        $.ajax({ url: url, dataType: "script", data: data, complete: function() {
+        $.ajax({ url: url, dataType: "html", accepts: { html: "application/javascript" }, data: data, success: function(data) {
+            table.find("tbody").html(data);
             column_header.siblings().removeClass("current");
             column_header.attr("data-order", order == "asc" ? "desc" : "asc").addClass("current");
         } });
