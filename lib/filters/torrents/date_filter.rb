@@ -2,10 +2,10 @@ class DateFilter < BasicFilter
   AVAILABLE_FILTERS = ["today", "last 3 days", "last 1 week", "last 2 weeks", "last 1 month", "All time"]
 
   AVAILABLE_FILTERS[1..-2].each do |filter_name|
-    num, method = filter_name.match(/^last\s(\d+)\s(\w+)$/).captures
+    num, method = filter_name.match(/^last\s(\d+)\s(\w+)$/i).captures
     code = %Q{
       def #{filter_name.gsub(' ', '_').underscore}(relation)
-        relation.where("\#{table_name(relation)}.created_at >= ?", Time.now.utc.beginning_of_day - #{num}.pred.#{method})
+        relation.where("\#{table_name(relation)}.created_at >= ?", Time.now.utc.end_of_day - #{num}.#{method})
       end
     }
     class_eval(code)

@@ -49,7 +49,7 @@ var bindRemoteActionLinks = function() {
     $(".remote.action").live("click", function(e) {
         var link = $(this);
         $.ajax({
-            type: link.attr("request") || "GET",
+            type: link.attr("request") || "POST",
             url: link.attr("href"),
             dataType: "script",
             data: filtersData(),
@@ -83,13 +83,13 @@ var bindFilterSelects = function() {
     $("select.filter").change(function() {
         var parent = $(this).parent();
         var url = parent.attr("data-url");
-        $.ajax({ url: url, dataType: "script", data: filtersData() });
+        $.ajax({ url: url, dataType: "script", data: filtersData(), beforeSend: showLoadingIcon, complete: hideLoadingIcon });
     });
 };
 
 $(function(){
     $(".spoiler .caption").live("click", toggleSpoiler);
-    $(".remote.action").live("ajax:beforeSend", showLoadingIcon).live("ajax:complete", hideLoadingIcon);
+    $(".action[data-remote!=''], .action.remote").live("ajax:beforeSend", showLoadingIcon).live("ajax:complete", hideLoadingIcon);
     bindRemoteActionLinks();
     bindSortableHeaders();
     bindFilterSelects();
