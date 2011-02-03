@@ -12,6 +12,7 @@ gem 'will_paginate', '~>3.0.pre2'
 gem 'mechanize', :require => 'nokogiri'
 gem 'haml'
 gem 'jquery-rails'
+gem 'whenever'
 group :test, :development do
   gem 'rspec-rails', '>=2.0.0'
   gem 'cucumber'
