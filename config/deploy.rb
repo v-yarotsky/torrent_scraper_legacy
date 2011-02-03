@@ -38,5 +38,5 @@ namespace :bundle do
 end
 
 task :create_cron_task do
-  run "cd #{current_path} && ruby `which whenever` -s environment=#{rails_env} -w crontab"
+  run "cd #{current_path} && ruby /home/gor/.rvm/gems/ruby-1.9.2-p136/bin/whenever -s environment=#{rails_env} -w crontab"
 end
