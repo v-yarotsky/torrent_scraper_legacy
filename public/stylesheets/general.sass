@@ -229,6 +229,14 @@ span.flag
     border-right: 1px dashed #BBBBBF
     padding: 0 10px
 
+th.sortable div.search
+  span.search_toggler
+    float: left
+  input[type='text']
+    float: left
+    display: none
+  &.active input[type='text']
+    display: block
 th.sortable.current
   font-style: italic
   &[data-order='desc']:after

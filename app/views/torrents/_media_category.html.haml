@@ -2,10 +2,10 @@
   %div.media_category.spoiler.expanded
     %h3.caption= media_category.name
     %div.tbl.content
-      %table{ "data-url" => sort_torrents_path(tracker.id, media_category.id) }
+      %table{ "data-sort-url" => sort_torrents_path(tracker.id, media_category.id), "data-search-url" => search_torrents_path(tracker.id, media_category.id) }
         %thead
           %tr
-            = sortable_column_header :title
+            = sortable_column_header :title, :searchable => true
             = sortable_column_header :seeders
             = sortable_column_header :size
             = non_sortable_column_header

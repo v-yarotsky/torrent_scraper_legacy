@@ -217,6 +217,14 @@ span.flag {
     border-right: 1px dashed #bbbbbf;
     padding: 0 10px; }
 
+th.sortable div.search span.search_toggler {
+  float: left; }
+th.sortable div.search input[type='text'] {
+  float: left;
+  display: none; }
+th.sortable div.search.active input[type='text'] {
+  display: block; }
+
 th.sortable.current {
   font-style: italic; }
   th.sortable.current[data-order='desc']:after {

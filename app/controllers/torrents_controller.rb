@@ -1,5 +1,6 @@
 class TorrentsController < ApplicationController
   before_filter :initialize_torrent, :only => [:download, :destroy]
+  before_filter :initialize_tracker_torrents, :only => [:sort, :search]
 
   def index
     initialize_torrents
@@ -11,11 +12,19 @@ class TorrentsController < ApplicationController
   end
 
   def sort
-    media_category = MediaCategory.find_by_id(params[:media_category_id])
-    tracker = Tracker.find_by_id(params[:tracker_id])
-    @torrents = initialize_torrents.for_tracker(tracker).for_category(media_category).order("torrents.#{params[:column]} #{params[:order]}")
+    @torrents = @torrents.order("torrents.#{params[:column]} #{params[:order]}")
     respond_to do |format|
-      format.js { render @torrents, :tracker => tracker }
+      format.js { render @torrents, :tracker => @tracker }
+      format.html { render :index }
+    end
+  end
+
+  def search
+    params[:search].each do |column, value|
+      @torrents = @torrents.where("torrents.#{column} LIKE ?", "%#{value}%")
+    end
+    respond_to do |format|
+      format.js { render @torrents, :tracker => @tracker }
       format.html { render :index }
     end
   end
@@ -37,6 +46,12 @@ class TorrentsController < ApplicationController
 
   def initialize_torrents
     @torrents = Filter.instance.filter(Torrent.scoped, { "date" => "today", "state" => "pending" }.merge(params))
+  end
+
+  def initialize_tracker_torrents
+    @media_category = MediaCategory.find_by_id(params[:media_category_id])
+    @tracker = Tracker.find_by_id(params[:tracker_id])
+    @torrents = initialize_torrents.for_tracker(@tracker).for_category(@media_category)
   end
 
 end

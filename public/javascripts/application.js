@@ -63,20 +63,62 @@ var bindRemoteActionLinks = function() {
 
 var bindSortableHeaders = function() {
     $("th.sortable").live("click", function() {
-        var column_header = $(this);
+        var column_header = $(this).addClass("current");
+        column_header.siblings().removeClass("current");
         var table = column_header.closest("table");
 
-        var url = table.attr("data-url");
-        var column = column_header.attr("data-column");
-        var order = column_header.attr("data-order") || "asc";
+        var url = table.attr("data-sort-url");
+        var data = getSortableParams(table) + filtersData();
 
-        var data = filtersData() + "&column=" + column + "&order=" + order;
         $.ajax({ url: url, dataType: "html", accepts: { html: "application/javascript" }, data: data, success: function(data) {
             table.find("tbody").html(data);
-            column_header.siblings().removeClass("current");
-            column_header.attr("data-order", order == "asc" ? "desc" : "asc").addClass("current");
+            column_header.attr("data-order", column_header.attr("data-order") == "asc" ? "desc" : "asc");
         } });
     });
+};
+
+var getSortableParams = function(table) {
+    var column_header = table.find("th.sortable.current");
+    if (column_header.length) {
+        var column = column_header.attr("data-column");
+        var order = column_header.attr("data-order") || "asc";
+        return "&column=" + column + "&order=" + order;
+    } else {
+        return "";
+    }
+};
+
+var bindSearch = function() {
+    $("th .search_toggler").live("click", function() {
+        $(this).parent().toggleClass("active");
+        return false;
+    }).end().find("input[type='text']").live("keydown", function(e) {
+        if (e.which == 10 || e.which == 13) {
+            var input = $(this);
+            var table = input.closest("table");
+            var url = table.attr("data-search-url");
+            var data = getSearchParams(table) + getSortableParams(table) + filtersData();
+            $.ajax({ url: url, data: data, dataType: "html", accepts: { html: "application/javascript" },
+                beforeSend: showLoadingIcon,
+                complete: hideLoadingIcon,
+                success: function(data) { table.find("tbody").html(data); }
+            });
+        }
+    }).live("click", function() { return false; });
+};
+
+var getSearchParams = function(table) {
+    var data = "";
+    table.find(".search.active").each(function() {
+        var input = $(this).find("input[type='text']");
+        var column = input.closest("th").attr("data-column");
+        data += "[" + column + "]=" + input.val();
+    });
+    if (data != "") {
+        return "search" + data;
+    } else {
+        return "";
+    }
 };
 
 var bindFilterSelects = function() {
@@ -92,5 +134,6 @@ $(function(){
     $(".action[data-remote!=''], .action.remote").live("ajax:beforeSend", showLoadingIcon).live("ajax:complete", hideLoadingIcon);
     bindRemoteActionLinks();
     bindSortableHeaders();
+    bindSearch();
     bindFilterSelects();
 });
