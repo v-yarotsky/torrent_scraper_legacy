@@ -1,8 +1,8 @@
 %h1= "Torrents"
-%div{ :id => "filters", "data-url" => torrents_path }
+%div{ :id => "filters", :data => { :url => torrents_path } }
   %span.label= "Filter:"
   = filter_select :date
   = filter_select :state
 &nbsp;
-%div#torrents.content
+#torrents.content
   = render "torrents"

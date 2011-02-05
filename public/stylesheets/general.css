@@ -115,10 +115,18 @@ div#wrapper {
     padding-left: 20px;
     font-weight: bold;
     color: #333333; }
-  .spoiler h3.caption:before {
-    content: "[+]"; }
-  .spoiler.expanded > h3.caption:before {
-    content: "[-]" !important; }
+  .spoiler h3.caption {
+    padding-left: 35px !important; }
+    .spoiler h3.caption span.toggler {
+      width: 21px;
+      height: 21px;
+      float: left;
+      position: absolute;
+      background: url("/images/icons/expand.gif") no-repeat;
+      text-indent: -9999px;
+      margin: -2px 0 0 -25px; }
+  .spoiler.expanded > h3.caption span.toggler {
+    background: url("/images/icons/collapse.gif") no-repeat; }
   .spoiler.expanded > .content {
     display: block; }
   .spoiler .content {
@@ -217,17 +225,28 @@ span.flag {
     border-right: 1px dashed #bbbbbf;
     padding: 0 10px; }
 
-th.sortable div.search span.search_toggler {
-  float: left; }
-th.sortable div.search input[type='text'] {
-  float: left;
-  display: none; }
-th.sortable div.search.active input[type='text'] {
-  display: block; }
-
-th.sortable.current {
-  font-style: italic; }
-  th.sortable.current[data-order='desc']:after {
-    content: "⇡"; }
-  th.sortable.current[data-order='asc']:after {
-    content: "⇣"; }
+th {
+  line-height: 23px; }
+  th.sortable div.search {
+    float: left;
+    margin: 1px 0 0 -3px;
+    position: absolute; }
+    th.sortable div.search span.search_toggler {
+      float: left;
+      text-indent: -9999px;
+      background: url("/images/icons/search_icon.png") no-repeat;
+      width: 20px;
+      height: 20px; }
+    th.sortable div.search input[type='text'] {
+      height: 17px;
+      border: 1px solid #aaaaaa;
+      float: left;
+      display: none; }
+    th.sortable div.search.active input[type='text'] {
+      display: block; }
+  th.sortable.current {
+    font-style: italic; }
+    th.sortable.current[data-order='desc']:after {
+      content: "⇣"; }
+    th.sortable.current[data-order='asc']:after {
+      content: "⇡"; }

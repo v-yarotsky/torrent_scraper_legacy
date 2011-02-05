@@ -125,11 +125,19 @@ div#wrapper
     padding-left: 20px
     font-weight: bold
     color: #333
-  h3.caption:before
-    content: "[+]"
+  h3.caption
+    padding-left: 35px !important
+    span.toggler
+      width: 21px
+      height: 21px
+      float: left
+      position: absolute
+      background: url("#{$icons_path}expand.gif") no-repeat
+      text-indent: -9999px
+      margin: -2px 0 0 -25px
   &.expanded
-    & > h3.caption:before
-      content: "[-]" !important
+    & > h3.caption span.toggler
+      background: url("#{$icons_path}collapse.gif") no-repeat
     & > .content
       display: block
   .content
@@ -229,17 +237,28 @@ span.flag
     border-right: 1px dashed #BBBBBF
     padding: 0 10px
 
-th.sortable div.search
-  span.search_toggler
+th
+  line-height: 23px
+  &.sortable div.search
     float: left
-  input[type='text']
-    float: left
-    display: none
-  &.active input[type='text']
-    display: block
-th.sortable.current
-  font-style: italic
-  &[data-order='desc']:after
-    content: '⇡'
-  &[data-order='asc']:after
-    content: '⇣'
+    margin: 1px 0 0 -3px
+    position: absolute
+    span.search_toggler
+      float: left
+      text-indent: -9999px
+      background: url("#{$icons_path}search_icon.png") no-repeat
+      width: 20px
+      height: 20px
+    input[type='text']
+      height: 17px
+      border: 1px solid #AAA
+      float: left
+      display: none
+    &.active input[type='text']
+      display: block
+  &.sortable.current
+    font-style: italic
+    &[data-order='desc']:after
+      content: '⇣'
+    &[data-order='asc']:after
+      content: '⇡'

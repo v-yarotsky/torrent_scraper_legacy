@@ -7,10 +7,10 @@
     = javascript_include_tag "jquery.cookie.js"
     = csrf_meta_tag
   %body
-    %div#wrapper
-      %div#navigation
+    #wrapper
+      #navigation
         = render "common/nav"
         = yield :navigation
       = yield
-      %div#loading
+      #loading
         %img{ :src => "/images/loading.gif", :alt => "Loading..." }

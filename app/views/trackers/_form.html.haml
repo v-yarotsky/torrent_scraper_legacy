@@ -4,7 +4,7 @@
   = f.input :login
   = f.input :password
   = link_to_add_fields :tracker_categories, f
-  %div.nested_fields
+  .nested_fields
     = f.simple_fields_for :tracker_categories do |fo|
       = render "tracker_category_fields", :f => fo
   = f.button :submit

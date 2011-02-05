@@ -1,8 +1,8 @@
 - trackers.each do |tracker|
   %div{ :id => "tracker_#{tracker.id}_spoiler", :class => "tracker spoiler" }
-    %div.caption
+    .caption
       = tracker.name
-    %div.content
+    .content
       - if @torrents.for_tracker(tracker).empty?
         %p= "No torrents yet..."
       = render :partial => "media_category", :collection => tracker.media_categories, :locals => { :tracker => tracker }

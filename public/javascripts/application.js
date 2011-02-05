@@ -65,15 +65,8 @@ var bindSortableHeaders = function() {
     $("th.sortable").live("click", function() {
         var column_header = $(this).addClass("current");
         column_header.siblings().removeClass("current");
-        var table = column_header.closest("table");
-
-        var url = table.attr("data-sort-url");
-        var data = getSortableParams(table) + filtersData();
-
-        $.ajax({ url: url, dataType: "html", accepts: { html: "application/javascript" }, data: data, success: function(data) {
-            table.find("tbody").html(data);
-            column_header.attr("data-order", column_header.attr("data-order") == "asc" ? "desc" : "asc");
-        } });
+        column_header.attr("data-order", column_header.attr("data-order") == "asc" ? "desc" : "asc");
+        filterTable(column_header);
     });
 };
 
@@ -83,42 +76,47 @@ var getSortableParams = function(table) {
         var column = column_header.attr("data-column");
         var order = column_header.attr("data-order") || "asc";
         return "&column=" + column + "&order=" + order;
-    } else {
-        return "";
     }
+    return "";
 };
 
 var bindSearch = function() {
     $("th .search_toggler").live("click", function() {
-        $(this).parent().toggleClass("active");
+        var toggler = $(this);
+        if (toggler.parent().is(".active")) {
+            var input = toggler.next("input[type='text']").val("");
+            filterTable(input);
+        }
+        toggler.parent().toggleClass("active");
         return false;
     }).end().find("input[type='text']").live("keydown", function(e) {
         if (e.which == 10 || e.which == 13) {
-            var input = $(this);
-            var table = input.closest("table");
-            var url = table.attr("data-search-url");
-            var data = getSearchParams(table) + getSortableParams(table) + filtersData();
-            $.ajax({ url: url, data: data, dataType: "html", accepts: { html: "application/javascript" },
-                beforeSend: showLoadingIcon,
-                complete: hideLoadingIcon,
-                success: function(data) { table.find("tbody").html(data); }
-            });
+            filterTable($(this));
         }
     }).live("click", function() { return false; });
+};
+
+var filterTable = function(element) {
+    var table = element.closest("table");
+    var url = element.attr("data-url");
+    var data = encodeURI(getSearchParams(table) + getSortableParams(table) + filtersData());
+    $.ajax({ url: url, data: data, dataType: "html", accepts: { html: "application/javascript" },
+        beforeSend: showLoadingIcon,
+        complete: hideLoadingIcon,
+        success: function(data) { table.find("tbody").html(data); }
+    });
 };
 
 var getSearchParams = function(table) {
     var data = "";
     table.find(".search.active").each(function() {
         var input = $(this).find("input[type='text']");
-        var column = input.closest("th").attr("data-column");
-        data += "[" + column + "]=" + input.val();
+        data += "[" + input.attr("data-column") + "]=" + input.val();
     });
     if (data != "") {
         return "search" + data;
-    } else {
-        return "";
     }
+    return "";
 };
 
 var bindFilterSelects = function() {

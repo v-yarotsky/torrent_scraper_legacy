@@ -31,6 +31,8 @@ GEM
     activesupport (3.0.1)
     arel (1.0.1)
       activesupport (~> 3.0.0)
+    block_helpers (0.3.3)
+      activesupport (>= 2.0)
     builder (2.1.2)
     cucumber (0.9.4)
       builder (~> 2.1.2)
@@ -121,6 +123,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  block_helpers
   cucumber
   factory_girl_rails
   haml

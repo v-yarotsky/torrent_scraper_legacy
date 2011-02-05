@@ -12,7 +12,6 @@ class TorrentsController < ApplicationController
   end
 
   def sort
-    @torrents = @torrents.order("torrents.#{params[:column]} #{params[:order]}")
     respond_to do |format|
       format.js { render @torrents, :tracker => @tracker }
       format.html { render :index }
@@ -20,9 +19,6 @@ class TorrentsController < ApplicationController
   end
 
   def search
-    params[:search].each do |column, value|
-      @torrents = @torrents.where("torrents.#{column} LIKE ?", "%#{value}%")
-    end
     respond_to do |format|
       format.js { render @torrents, :tracker => @tracker }
       format.html { render :index }
@@ -49,9 +45,15 @@ class TorrentsController < ApplicationController
   end
 
   def initialize_tracker_torrents
-    @media_category = MediaCategory.find_by_id(params[:media_category_id])
+    media_category = MediaCategory.find_by_id(params[:media_category_id])
     @tracker = Tracker.find_by_id(params[:tracker_id])
-    @torrents = initialize_torrents.for_tracker(@tracker).for_category(@media_category)
+    @torrents = initialize_torrents.for_tracker(@tracker).for_category(media_category)
+    unless params[:column].blank? or params[:order].blank?
+      @torrents = @torrents.order("torrents.#{params[:column]} #{params[:order]}")
+    end
+    params[:search].reject {|k, v| v.blank? }.each do |column, value|
+      @torrents = @torrents.where("torrents.#{column} LIKE ?", "%#{value}%")
+    end if params[:search]
   end
 
 end

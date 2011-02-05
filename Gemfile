@@ -13,6 +13,7 @@ gem 'mechanize', :require => 'nokogiri'
 gem 'haml'
 gem 'jquery-rails'
 gem 'whenever'
+gem 'block_helpers'
 group :test, :development do
   gem 'rspec-rails', '>=2.0.0'
   gem 'cucumber'

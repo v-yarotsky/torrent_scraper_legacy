@@ -1,7 +1,7 @@
 module LinksHelper
 
   def link_to_download(torrent)
-    link_to "Download!", download_torrent_path(torrent.id), :class => "remote action download"
+    link_to "Download!", download_torrent_path(torrent.id), :remote => true, :with => "filtersData()", :class => "action download"
   end
 
   def link_to_delete(object)
