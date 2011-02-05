@@ -7,6 +7,10 @@ module TableHeaderHelper
       @media_category = media_category
     end
 
+    def display(body)
+      content_tag :thead, body
+    end
+
     def sortable_column(column_name, options = {})
       column_title = options[:title] || column_name.to_s.humanize
 

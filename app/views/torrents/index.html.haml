@@ -1,3 +1,6 @@
+- content_for :javascripts do
+  = javascript_include_tag "sort_and_search.js"
+  = javascript_include_tag "spoiler.js"
 %h1= "Torrents"
 %div{ :id => "filters", :data => { :url => torrents_path } }
   %span.label= "Filter:"

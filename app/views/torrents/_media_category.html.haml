@@ -1,15 +1,14 @@
 - if @torrents.for_tracker(tracker).for_category(media_category).any?
-  .media_category.spoiler.expanded
+  %div.spoiler.expanded[media_category]
     %h3.caption
       %span.toggler
       = media_category.name
     .tbl.content
       %table
-        %thead
-          - table_header(tracker, media_category) do |t|
-            = t.sortable_column :title, :searchable => true
-            = t.sortable_column :seeders
-            = t.sortable_column :size
-            = t.column
+        - table_header(tracker, media_category) do |t|
+          = t.sortable_column :title, :searchable => true
+          = t.sortable_column :seeders
+          = t.sortable_column :size
+          = t.column
         %tbody
           = render @torrents.for_tracker(tracker).for_category(media_category)
