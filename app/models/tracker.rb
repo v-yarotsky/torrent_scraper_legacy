@@ -13,4 +13,8 @@ class Tracker < ActiveRecord::Base
     scraper
   end
 
+  def origin_url
+    self.url[/(?!\/)http:\/\/\w+\.\w+/]
+  end
+
 end

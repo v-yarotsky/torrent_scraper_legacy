@@ -26,7 +26,7 @@ class RutrackerOrgScraper
   def get_torrent_attributes(row)
     torrent_attributes = {
       :title => row.at_css('a.med.tLink').text,
-      :link => row.at_css("a.tr-dl").attr('href'),
+      :link => row.at_css("a.tr-dl").attr("href"),
       :tracker_link => form_link(row.at_css('a.med.tLink')),
       :size => Utils.parse_size(row.at_css("a.tr-dl").text),
       :seeders => row.at_css("td.seedmed b").text.to_i,

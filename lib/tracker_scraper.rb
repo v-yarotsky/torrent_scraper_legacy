@@ -9,7 +9,9 @@ module TrackerScraper
 
     @tracker = Tracker.find_by_name(tracker_name)
     raise ArgumentError.new("Tracker does not exist!") if @tracker.blank?
+    Mechanize.log = Rails.logger
     @agent = Mechanize.new
+    @agent.user_agent_alias = 'Linux Firefox'
   end
 
   def process(&block)
@@ -65,9 +67,14 @@ module TrackerScraper
     process do
       dir = File.join(Rails.root, 'public', 'torrents')
       FileUtils.mkdir_p(dir)
-      torrent_file = @agent.get(torrent.link)
+      torrent_file = @agent.post(torrent.link,
+                                { 'Content-Type' => 'application/x-www-form-urlencoded',
+                                  'Origin' => torrent.tracker_origin_url,
+                                  'Referer' => torrent.tracker_link,
+                                  'Accept' => 'application/xml,application/xhtml+xml,text/html;q=0.9,text/plain;q=0.8,image/png,*/*;q=0.5'})
       filename = "#{dir}/#{torrent_file.filename.gsub /^"|"$/, ''}"
       torrent_file.save_as(filename)
+      @agent.get(torrent.tracker_url)
     end
     Rails.logger.info("Torrent downloaded to: #{filename}")
     filename

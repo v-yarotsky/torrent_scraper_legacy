@@ -7,7 +7,7 @@ class TorrentsController < ApplicationController
   end
 
   def download
-    #@torrent.download!
+    @torrent.download!
     initialize_torrents
   end
 
@@ -26,7 +26,7 @@ class TorrentsController < ApplicationController
   end
 
   def destroy
-    #@torrent.mark_as_deleted!
+    @torrent.mark_as_deleted!
     initialize_torrents
     respond_to do |format|
       format.js

@@ -67,7 +67,7 @@ module XbttScraper
 
   def form_link(node)
     return nil unless node.present?
-    [torrent_link_prefix, node.attr('href')].join
+    [torrent_link_prefix, node.attr('href').gsub(/^\.\//, '')].join
   end
 
 end
