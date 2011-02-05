@@ -35,6 +35,7 @@ module TrackerScraper
   end
 
   def logout
+    @agent.get(@tracker.url)
   end
 
   def set_options
@@ -74,7 +75,6 @@ module TrackerScraper
                                   'Accept' => 'application/xml,application/xhtml+xml,text/html;q=0.9,text/plain;q=0.8,image/png,*/*;q=0.5'})
       filename = "#{dir}/#{torrent_file.filename.gsub /^"|"$/, ''}"
       torrent_file.save_as(filename)
-      @agent.get(torrent.tracker_url)
     end
     Rails.logger.info("Torrent downloaded to: #{filename}")
     filename
