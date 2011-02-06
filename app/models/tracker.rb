@@ -4,7 +4,10 @@ class Tracker < ActiveRecord::Base
   has_many :media_categories, :through => :tracker_categories, :uniq => true
   has_many :torrents, :through => :tracker_categories
 
-  accepts_nested_attributes_for :tracker_categories, :allow_destroy => true
+  accepts_nested_attributes_for :tracker_categories, :allow_destroy => true, :reject_if => :all_blank
+
+  validates :name, :presence => true
+  validates :url, :format => { :with => URI::regexp(%w(http https)) }, :presence => true
 
   def get_scraper
     scraper_name = self.name.split(/[.-]/).map(&:capitalize).join + "Scraper"

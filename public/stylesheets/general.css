@@ -73,8 +73,8 @@ div#wrapper {
     min-height: 30px; }
     .simple_form div.input input, .simple_form div.input textarea {
       border: 1px solid #e0e0e0; }
-    .simple_form div.input select, .simple_form div.input input {
-      min-width: 230px; }
+    .simple_form div.input select, .simple_form div.input input, .simple_form div.input textarea {
+      width: 300px; }
     .simple_form div.input input[type='checkbox'] {
       min-width: 1px; }
   .simple_form div.boolean, .simple_form input[type='submit'] {

@@ -1,0 +1,27 @@
+div.content form {
+  width: 100%; }
+  div.content form div.tbl table td {
+    line-height: 16px !important;
+    padding: 0 4px 0 2px !important;
+    margin: 0; }
+  div.content form div.tbl table td.seeders {
+    width: 90px; }
+  div.content form div.tbl table td.actions {
+    padding: 0 5px !important; }
+  div.content form div.tbl table input, div.content form div.tbl table select {
+    width: 100%; }
+  div.content form div.tbl table input {
+    border: 1px solid #e0e0e0; }
+
+div.actions {
+  width: 100%;
+  float: none;
+  clear: none;
+  position: relative;
+  margin-top: 5px; }
+  div.actions input[type='submit'] {
+    margin-left: auto; }
+  div.actions .action.add, div.actions .action.new {
+    position: absolute;
+    right: 0;
+    top: 0; }

@@ -1,13 +1,19 @@
 module LinksHelper
 
-  def link_to_download(torrent)
-    link_to "Download!", download_torrent_path(torrent.id), :remote => true, :with => "filtersData()", :class => "action download"
+  def remote_link_to_download(torrent)
+    link_to "Download!", download_torrent_path(torrent.id), :class => "remote action download"
+  end
+
+  def remote_link_to_delete(object)
+    method = "#{object.class.name.underscore}_path"
+    url = send(method, object.id)
+    link_to "Delete", url, :request => "delete", :confirm => "Are you sure?", :class => "remote action delete"
   end
 
   def link_to_delete(object)
     method = "#{object.class.name.underscore}_path"
     url = send(method, object.id)
-    link_to "Delete", url, :request => :delete, :confirm => "Are you sure?", :class => "remote action delete"
+    link_to "Delete", url, :method=> "delete", :confirm => "Are you sure?", :class => "action delete"
   end
 
   def link_to_add(object)
@@ -36,18 +42,6 @@ module LinksHelper
     method = "#{object}_path"
     url = send(method)
     link_to object.to_s.humanize, url
-  end
-
-  def link_to_remove_fields(f)
-    f.hidden_field(:_destroy) + link_to_function("Delete", "remove_fields(this)", :class => "action delete with_text inline")
-  end
-
-  def link_to_add_fields(association, f)
-    new_object = f.object.class.reflect_on_association(association).klass.new
-    fields = f.fields_for(association, new_object, :child_index => "new_#{association}") do |builder|
-      render(association.to_s.singularize + "_fields", :f => builder)
-    end
-    link_to_function("Add", ("add_fields(this, \"#{association}\", \"#{escape_javascript(fields)}\")"), :class => "action add with_text block")
   end
 
 end

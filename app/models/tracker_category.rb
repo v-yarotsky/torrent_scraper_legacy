@@ -7,6 +7,12 @@ class TrackerCategory < ActiveRecord::Base
 
   before_save -> { create_media_category_from_name }
 
+  delegate :name, :to => :media_category, :prefix => true
+
+  validates_presence_of :name_on_tracker
+  validates_numericality_of :min_seeders
+  validates_associated :media_category
+  default_scope order("created_at ASC")
   protected
 
   def create_media_category_from_name

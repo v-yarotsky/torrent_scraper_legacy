@@ -9,6 +9,7 @@ TorrentScraper::Application.routes.draw do
   match "torrents" => "torrents#index"
 
   resources :trackers
+  match "media_categories/create" => "trackers#create_media_category", :as => :create_media_category
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

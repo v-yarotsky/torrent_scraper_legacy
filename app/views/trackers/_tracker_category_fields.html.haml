@@ -1,14 +1,7 @@
-.fields
-  .fields_content
-    .inline_fields
-      = f.association :media_category, :wrapper_tag => :span
-      or create new
-      = f.input :new_media_category_name, :wrapper_tag => :span, :label => false, :input_html => { :size => 21 }
-    = f.input :name_on_tracker
-    .spoiler
-      %span.caption Additional settings
-      .content
-        = f.input :allowed_keywords
-        = f.input :disallowed_keywords
-        = f.input :min_seeders
-  = link_to_remove_fields f
+%tr[f.object]
+  %td= media_category_select f
+  %td= f.text_field :name_on_tracker
+  %td= f.text_field :allowed_keywords
+  %td= f.text_field :disallowed_keywords
+  %td.seeders= f.text_field :min_seeders
+  %td.actions= link_to_remove_fields f

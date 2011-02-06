@@ -2,7 +2,7 @@
 %html
   %head
     %title TorrentScraper
-    = stylesheet_link_tag :all
+    = stylesheet_link_tag "general.css"
     = yield :stylesheets if content_for?(:stylesheets)
     = javascript_include_tag :defaults
     = javascript_include_tag "jquery.cookie.js"
@@ -13,6 +13,8 @@
       #navigation
         = render "common/nav"
         = yield :navigation
+      #messages
+        = yield :messages if content_for?(:messages)
       = yield
     #loading
       %img{ :src => "/images/loading.gif", :alt => "Loading..." }

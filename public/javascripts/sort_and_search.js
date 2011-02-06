@@ -16,9 +16,8 @@ var bindRemoteActionLinks = function() {
             dataType: "script",
             data: filtersData(),
             beforeSend: function(xhr, settings) { link.trigger("ajax:beforeSend", [xhr, settings]); },
-            complete: function(xhr, status) { link.trigger("ajax:complete", [xhr, status]); }
+            complete: function(xhr, status) { link.trigger("ajax:complete", [xhr, status]); $.event.trigger("reloaded"); }
         });
-        e.preventDefault();
         return false;
     });
 };

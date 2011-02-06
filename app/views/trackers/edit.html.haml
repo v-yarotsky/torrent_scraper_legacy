@@ -1,6 +1,5 @@
-- content_for :javascripts do
-  = javascript_include_tag "spoiler.js"
-%h1 Edit tracker
-= render "form"
-.actions
-  = link_back_to :trackers
+- content_for :messages do
+  = flash[:message]
+.content
+  %h1 Edit tracker
+  = render "form"

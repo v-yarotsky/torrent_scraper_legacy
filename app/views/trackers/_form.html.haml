@@ -1,10 +1,23 @@
+- content_for :javascripts do
+  = javascript_include_tag "tracker_category.js"
 = simple_form_for @tracker do |f|
   = f.input :name
   = f.input :url
   = f.input :login
   = f.input :password
-  = link_to_add_fields :tracker_categories, f
-  .nested_fields
-    = f.simple_fields_for :tracker_categories do |fo|
-      = render "tracker_category_fields", :f => fo
-  = f.button :submit
+  .tbl
+    %table.tracker_categories
+      %thead
+        %tr
+          %th Media category
+          %th Name on tracker
+          %th Required keywords
+          %th Disallowed keywords
+          %th Min seeders
+          %th
+      %tbody
+        = f.simple_fields_for :tracker_categories do |fo|
+          = render "tracker_category_fields", :f => fo
+  .actions
+    = f.button :submit
+    = link_to_add_fields :tracker_categories, f

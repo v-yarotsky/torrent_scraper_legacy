@@ -18,10 +18,11 @@ class TrackersController < ApplicationController
   def update
     if @tracker.update_attributes(params[:tracker])
       flash.now[:message] = "Tracker added successfully"
+      redirect_to edit_tracker_path(@tracker)
     else
       flash.now[:message] = "Error adding tracker!"
+      render :edit
     end
-    respond_with @tracker
   end
 
   def new
@@ -37,6 +38,15 @@ class TrackersController < ApplicationController
   def destroy
     @tracker.destroy
     @trackers = Tracker.all
+    render :index
+  end
+
+  def create_media_category
+    return unless params[:new_media_category_name]
+    MediaCategory.create(:name => params[:new_media_category_name])
+    respond_to do |format|
+      format.json { render :json => MediaCategory.options_for_select.to_json }
+    end
   end
 
   protected

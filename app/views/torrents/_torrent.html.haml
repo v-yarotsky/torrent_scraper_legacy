@@ -3,5 +3,5 @@
   %td= torrent.seeders
   %td= number_to_human_size torrent.size
   %td
-    = link_to_download torrent
-    = link_to_delete torrent
+    = remote_link_to_download torrent
+    = remote_link_to_delete torrent

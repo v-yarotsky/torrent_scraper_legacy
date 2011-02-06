@@ -12,5 +12,4 @@
     %ul.categories
       - @tracker.media_categories.each do |category|
         %li[category]= category.name
-= link_back_to :trackers
 = link_to_edit @tracker
