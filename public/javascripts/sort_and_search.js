@@ -62,8 +62,6 @@ var filterTable = function(element) {
     var url = element.attr("data-url");
     var data = encodeURI(getSearchParams(table) + getSortableParams(table) + filtersData());
     $.ajax({ url: url, data: data, dataType: "html", accepts: { html: "application/javascript" },
-        beforeSend: showLoadingIcon,
-        complete: hideLoadingIcon,
         success: function(data) { table.find("tbody").html(data); }
     });
 };
