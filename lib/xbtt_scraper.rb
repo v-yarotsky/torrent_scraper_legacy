@@ -59,7 +59,7 @@ module XbttScraper
       return nil
     end
 
-    torrent = Torrent.find_or_create_by_link torrent_attributes[:link]
+    torrent = Torrent.find_or_create_by_tracker_link torrent_attributes[:tracker_link]
     torrent.update_attributes(torrent_attributes)
 
     Rails.logger.info("====errors: #{torrent.errors.full_messages.to_sentence}====") if torrent.errors.any?
