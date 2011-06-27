@@ -38,7 +38,7 @@ module TableHeaderHelper
       search_field = content_tag :div, :class => "search" do
         content_tag(:span, "[Q]", :class => "search_toggler") +
         text_field_tag(:query, "", "data-url" => search_torrents_path(@tracker.id, @media_category.id),
-                                     "data-column" => column_name)
+                                   "data-column" => column_name)
       end
       raw search_field
     end

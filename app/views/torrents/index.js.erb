@@ -1,1 +1,1 @@
-$("div#torrents.content").html("<%= escape_javascript(render "torrents") %>");
+$("div#torrents.content").html("<%= escape_javascript(render "torrents", :torrents => torrents) %>");

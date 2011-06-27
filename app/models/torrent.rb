@@ -10,8 +10,22 @@ class Torrent < ActiveRecord::Base
   @@seeders_limit = 5
   cattr_accessor :seeders_limit
 
-  scope :for_tracker, ->(the_tracker) { joins(:tracker_category).where("tracker_categories.tracker_id = ?", the_tracker.id) }
-  scope :for_category, ->(category) { joins(:tracker_category).where("tracker_categories.media_category_id = ?", category) }
+  scope :for_tracker, ->(tracker) { tracker.blank? ? scoped : joins(:tracker_category).where("tracker_categories.tracker_id = ?", tracker.to_param) }
+  scope :for_category, ->(category) { category.blank? ? scoped : joins(:tracker_category).where("tracker_categories.media_category_id = ?", category.to_param) }
+  
+  scope :search, lambda { |terms|    
+    return scoped unless terms
+    relation = scoped.clone
+    terms.reject {|k, v| v.blank? }.each do |column, value|
+      relation &= where("torrents.#{column} LIKE ?", "%#{value}%")
+    end
+    relation
+  }
+
+  scope :ordered, lambda { |column, order|
+    return scoped if column.blank? or order.blank?
+    order("torrents.#{column} #{order}")
+  }
 
   delegate :origin_url, :url, :to => :tracker, :prefix => true
 

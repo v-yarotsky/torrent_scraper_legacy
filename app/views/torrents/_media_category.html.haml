@@ -1,4 +1,4 @@
-- if @torrents.for_tracker(tracker).for_category(media_category).any?
+- if torrents.for_tracker(tracker).for_category(media_category).any?
   %div.spoiler.expanded[media_category]
     %h3.caption
       %span.toggler
@@ -11,4 +11,4 @@
           = t.sortable_column :size
           = t.column
         %tbody
-          = render @torrents.for_tracker(tracker).for_category(media_category)
+          = render torrents.for_tracker(tracker).for_category(media_category)

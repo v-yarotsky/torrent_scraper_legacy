@@ -1,19 +1,19 @@
 module LinksHelper
 
   def remote_link_to_download(torrent)
-    link_to "Download!", download_torrent_path(torrent.id), :class => "remote action download"
+    link_to "Download!", download_torrent_path(torrent), :method => :post, :class => "remote action download"
   end
 
   def remote_link_to_delete(object)
     method = "#{object.class.name.underscore}_path"
-    url = send(method, object.id)
-    link_to "Delete", url, :request => "delete", :confirm => "Are you sure?", :class => "remote action delete"
+    url = send(method, object)
+    link_to "Delete", url, :request => :delete, :confirm => "Are you sure?", :class => "remote action delete"
   end
 
   def link_to_delete(object)
     method = "#{object.class.name.underscore}_path"
-    url = send(method, object.id)
-    link_to "Delete", url, :method=> "delete", :confirm => "Are you sure?", :class => "action delete"
+    url = send(method, object)
+    link_to "Delete", url, :method => :delete, :confirm => "Are you sure?", :class => "action delete"
   end
 
   def link_to_add(object)
@@ -24,13 +24,13 @@ module LinksHelper
 
   def link_to_edit(object)
     method = "edit_#{object.class.name.underscore}_path"
-    url = send(method, object.id)
+    url = send(method, object)
     link_to "Edit", url, :class => "action edit"
   end
 
   def link_to_show(object)
     method = "#{object.class.name.underscore}_path"
-    url = send(method, object.id)
+    url = send(method, object)
     link_to "Show", url, :class => "action show"
   end
 

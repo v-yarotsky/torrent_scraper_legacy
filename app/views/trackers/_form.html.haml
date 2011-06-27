@@ -1,6 +1,6 @@
 - content_for :javascripts do
   = javascript_include_tag "tracker_category.js"
-= simple_form_for @tracker do |f|
+= simple_form_for tracker do |f|
   = f.input :name
   = f.input :url
   = f.input :login

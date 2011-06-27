@@ -1,4 +1,4 @@
-set :application, "TorrentScraper"
+set :application, "scraper"
 role :web, "192.168.1.4"
 
 set :user, "gor"
@@ -9,10 +9,9 @@ set :deploy_via, :remote_cache
 set :scm_user, "gor"
 set :repository, "git://gitorious.org/scraper/scraper.git"
 
-set :deploy_to, "/home/#{user}/#{application}"
+set :deploy_to, "/home/#{user}/Projects/#{application}"
 
 default_run_options[:pty] = true
-ssh_options[:port] = 7465
 set :restart_method, :nginx
 set :rails_env, "production"
 set :rake, "$GEM_HOME/bin/rake"

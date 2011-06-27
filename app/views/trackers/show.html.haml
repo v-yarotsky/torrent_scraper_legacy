@@ -1,15 +1,15 @@
 #tracker.info
-  %p= link_to @tracker.name, @tracker.url
+  %p= link_to tracker.name, tracker.url
   .credentials
     %p
       %span Login:
-      = @tracker.login
+      = tracker.login
     %p
       %span Password:
-      = @tracker.password
+      = tracker.password
   %div
     %p Categories:
     %ul.categories
-      - @tracker.media_categories.each do |category|
+      - tracker.media_categories.each do |category|
         %li[category]= category.name
-= link_to_edit @tracker
+= link_to_edit tracker

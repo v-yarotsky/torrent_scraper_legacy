@@ -1,8 +1,7 @@
 var filtersData = function() {
-  var filters = "";
+  var filters = {};
   $(".filter").each(function() {
-      var filter = $(this);
-      filters += "&" + filter.attr("data-name") + "=" + filter.val();
+      filters[$(this).attr("data-name")] = $(this).val();
   });
   return filters;
 };
@@ -36,9 +35,9 @@ var getSortableParams = function(table) {
     if (column_header.length) {
         var column = column_header.attr("data-column");
         var order = column_header.attr("data-order") || "asc";
-        return "&column=" + column + "&order=" + order;
+        return { column: column, order :order };
     }
-    return "";
+    return {};
 };
 
 var bindSearch = function() {
@@ -60,22 +59,22 @@ var bindSearch = function() {
 var filterTable = function(element) {
     var table = element.closest("table");
     var url = element.attr("data-url");
-    var data = encodeURI(getSearchParams(table) + getSortableParams(table) + filtersData());
-    $.ajax({ url: url, data: data, dataType: "html", accepts: { html: "application/javascript" },
+    var data = $.extend({}, getSearchParams(table), getSortableParams(table), filtersData());
+    $.ajax({ url: url, type: "POST", data: data, dataType: "html", accepts: { html: "application/javascript" },
         success: function(data) { table.find("tbody").html(data); }
     });
 };
 
 var getSearchParams = function(table) {
-    var data = "";
+    var data = {};
     table.find(".search.active").each(function() {
         var input = $(this).find("input[type='text']");
-        data += "[" + input.attr("data-column") + "]=" + input.val();
+        data[input.attr("data-column")] = input.val();
     });
-    if (data != "") {
-        return "search" + data;
+    if ($.isEmptyObject(data)) {
+        return {};
     }
-    return "";
+    return { search: data };
 };
 
 var bindFilterSelects = function() {

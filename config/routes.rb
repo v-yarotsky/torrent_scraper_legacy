@@ -2,11 +2,16 @@
 TorrentScraper::Application.routes.draw do
 
   root :to => "torrents#index"
-  match "torrents/:id/download" => "torrents#download", :as => :download_torrent
-  match "torrents/:id/destroy" => "torrents#destroy", :as => :torrent, :via => :delete
-  match "torrents/:tracker_id/:media_category_id" => "torrents#sort", :as => :sort_torrents
-  match "torrents/:tracker_id/:media_category_id/search" => "torrents#search", :as => :search_torrents
-  match "torrents" => "torrents#index"
+  
+  resources :torrents, :only => [:index, :destroy] do
+    post :download, :on => :member
+    collection do
+      scope ':tracker_id/:media_category_id' do
+        post :sort
+        post :search
+      end
+    end
+  end
 
   resources :trackers
   match "media_categories/create" => "trackers#create_media_category", :as => :create_media_category
