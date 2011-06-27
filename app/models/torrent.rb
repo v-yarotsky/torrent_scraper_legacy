@@ -1,7 +1,8 @@
 class Torrent < ActiveRecord::Base
 
   belongs_to :tracker_category
-  has_one :tracker, :through => :tracker_category
+  belongs_to :tracker
+  belongs_to :media_category
 
   validates_presence_of :title, :link, :seeders
   validates_uniqueness_of :link

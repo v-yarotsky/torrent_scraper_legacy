@@ -11,4 +11,4 @@
           = t.sortable_column :size
           = t.column
         %tbody
-          = render torrents.for_tracker(tracker).for_category(media_category)
+          = render torrents_for_tracker_and_media_category(tracker, media_category)

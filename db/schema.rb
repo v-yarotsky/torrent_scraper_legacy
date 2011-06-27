@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110119201131) do
+ActiveRecord::Schema.define(:version => 20110627203151) do
 
   create_table "media_categories", :force => true do |t|
     t.string   "name"
@@ -29,6 +29,8 @@ ActiveRecord::Schema.define(:version => 20110119201131) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.boolean  "deleted"
+    t.integer  "tracker_id"
+    t.integer  "media_category_id"
   end
 
   create_table "tracker_categories", :force => true do |t|

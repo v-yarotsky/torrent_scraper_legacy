@@ -50,7 +50,7 @@ module XbttScraper
   def parse_torrent(row)
     category_name_on_tracker = get_torrent_category_name(row)
     category = TrackerCategory.where("tracker_id = ? AND name_on_tracker = ?", @tracker.id, category_name_on_tracker).first
-    torrent_attributes = get_torrent_attributes(row).merge({ :tracker_category => category })
+    torrent_attributes = get_torrent_attributes(row).merge({ :tracker_category => category, :media_category_id => category.media_category_id, :tracker_id => category.tracker_id })
 
     Rails.logger.info("Torrent title: #{torrent_attributes[:title].slice(0, 50)}..., media: #{torrent_attributes[:tracker_category].media_category.name}, category: #{torrent_attributes[:tracker_category].name_on_tracker}, seeders: #{torrent_attributes[:seeders]}, size: #{torrent_attributes[:size]}")
 
