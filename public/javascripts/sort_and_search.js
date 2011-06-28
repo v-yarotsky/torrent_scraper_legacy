@@ -6,21 +6,6 @@ var filtersData = function() {
   return filters;
 };
 
-var bindRemoteActionLinks = function() {
-    $(".remote.action").live("click", function(e) {
-        var link = $(this);
-        $.ajax({
-            type: link.attr("request") || "POST",
-            url: link.attr("href"),
-            dataType: "script",
-            data: filtersData(),
-            beforeSend: function(xhr, settings) { link.trigger("ajax:beforeSend", [xhr, settings]); },
-            complete: function(xhr, status) { link.trigger("ajax:complete", [xhr, status]); $.event.trigger("reloaded"); }
-        });
-        return false;
-    });
-};
-
 var bindSortableHeaders = function() {
     $("th.sortable").live("click", function() {
         var column_header = $(this).addClass("current");
@@ -89,7 +74,6 @@ var bindFilterSelects = function() {
 };
 
 $(function(){
-    bindRemoteActionLinks();
     bindSortableHeaders();
     bindSearch();
     bindFilterSelects();

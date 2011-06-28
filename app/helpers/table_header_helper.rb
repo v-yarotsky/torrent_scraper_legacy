@@ -13,23 +13,26 @@ module TableHeaderHelper
 
     def sortable_column(column_name, options = {})
       column_title = options[:title] || column_name.to_s.humanize
-
-      html = content_tag :th, :class => "sortable",
-                              "data-url" => sort_torrents_path(@tracker.id, @media_category.id),
-                              "data-column" => column_name,
-                              "data-order" => "asc" do
-        if options[:searchable] == true
+      generic_options = {
+        :class => "sortable",
+        "data-url" => sort_torrents_path(@tracker.id, @media_category.id),
+        "data-column" => column_name,
+        "data-order" => "asc"
+      }
+      searchable = options.delete :searchable
+      html = content_tag :th, generic_options.merge(options) do
+        if searchable == true
           search_field(column_name) + column_title
         else
           column_title
         end
       end
-      raw html
+      html.html_safe
     end
 
-    def column(title = "")
-      html = content_tag :th, title
-      raw html
+    def column(title = "", options = {})
+      html = content_tag :th, title, options
+      html.html_safe
     end
 
     private
@@ -40,7 +43,7 @@ module TableHeaderHelper
         text_field_tag(:query, "", "data-url" => search_torrents_path(@tracker.id, @media_category.id),
                                    "data-column" => column_name)
       end
-      raw search_field
+      search_field.html_safe
     end
 
   end

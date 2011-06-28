@@ -155,7 +155,8 @@ div.actions {
   height: 16px;
   display: inline-block;
   vertical-align: middle;
-  white-space: nowrap; }
+  white-space: nowrap;
+  line-height: 16px; }
   .action:hover {
     background: none;
     color: black !important; }
@@ -164,8 +165,7 @@ div.actions {
   .action.with_text {
     text-indent: 0 !important;
     text-decoration: none;
-    padding-left: 20px;
-    vertical-align: top; }
+    padding-left: 20px; }
   .action.add {
     background: url("/images/icons/add.png") no-repeat; }
   .action.back {
@@ -250,3 +250,14 @@ th {
       content: "⇣"; }
     th.sortable.current[data-order='asc']:after {
       content: "⇡"; }
+
+#toolbar {
+  height: 25px;
+  margin-bottom: 1em;
+  line-height: 25px; }
+  #toolbar #filters {
+    float: left; }
+  #toolbar #copy_destination {
+    float: right; }
+  #toolbar #actions {
+    margin: 0 10px; }

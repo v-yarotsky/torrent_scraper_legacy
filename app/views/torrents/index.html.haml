@@ -1,11 +1,14 @@
 - content_for :javascripts do
-  = javascript_include_tag "sort_and_search.js"
-  = javascript_include_tag "spoiler.js"
+  = javascript_include_tag "sort_and_search", "spoiler", "copy", "actions"
 %h1= "Torrents"
-%div{ :id => "filters", :data => { :url => torrents_path } }
-  %span.label= "Filter:"
-  = filter_select :date
-  = filter_select :state
-&nbsp;
+#toolbar
+  %div{ :id => "filters", :data => { :url => torrents_path } }
+    %span.label= "Filter:"
+    = filter_select :date
+    = filter_select :state
+  = render "actions"
+  #copy_destination
+    %span.label= "Destination folder: "
+    = text_field_tag "destination", cookies[:copy_destination], :id => "copy_destination_folder"
 #torrents.content
   = render "torrents", :torrents => torrents

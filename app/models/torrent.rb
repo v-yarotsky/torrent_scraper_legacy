@@ -28,6 +28,23 @@ class Torrent < ActiveRecord::Base
     order("torrents.#{column} #{order}")
   }
 
+  class << self
+    def mark_as_deleted!(torrent_ids)
+      process_torrents(torrent_ids) { |torrent| torrent.mark_as_deleted! }
+    end
+    
+    def download!(torrent_ids)
+      process_torrents(torrent_ids) { |torrent| torrent.download! }
+    end
+    
+    private
+    
+    def process_torrents(torrent_ids, &block)
+      torrents = Torrent.where("torrents.id IN (?)", Array.wrap(torrent_ids)).all
+      torrents.each { |torrent| block.call(torrent) }
+    end
+  end
+  
   delegate :origin_url, :url, :to => :tracker, :prefix => true
 
   def check_torrent

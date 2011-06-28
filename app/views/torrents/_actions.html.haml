@@ -1,0 +1,4 @@
+%span#actions
+  %span.label= "Actions: "
+  = link_to "Download", download_torrents_path, :request => :post, :class => "remote action download group with_text"
+  = link_to "Delete", torrents_path, :request => :delete, :class => "remote action delete group with_text"

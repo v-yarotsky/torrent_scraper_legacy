@@ -167,6 +167,7 @@ div.actions
   display: inline-block
   vertical-align: middle
   white-space: nowrap
+  line-height: 16px
   &:hover
     background: none
     color: #000 !important
@@ -176,7 +177,6 @@ div.actions
     text-indent: 0 !important
     text-decoration: none
     padding-left: 20px
-    vertical-align: top
   &.add
     background: url("#{$icons_path}add.png") no-repeat
   &.back
@@ -262,3 +262,14 @@ th
       content: '⇣'
     &[data-order='asc']:after
       content: '⇡'
+      
+#toolbar
+  height: 25px
+  margin-bottom: 1em
+  line-height: 25px
+  #filters
+    float: left
+  #copy_destination
+    float: right
+  #actions
+    margin: 0 10px

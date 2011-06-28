@@ -1,11 +1,12 @@
 - if torrents.for_tracker(tracker).for_category(media_category).any?
-  %div.spoiler.expanded[media_category]
+  .spoiler.expanded[media_category]
     %h3.caption
       %span.toggler
       = media_category.name
     .tbl.content
       %table
         - table_header(tracker, media_category) do |t|
+          = t.column check_box_tag media_category.id, 1, false, :class => "select_media_category_torrents", :id => "select_media_category_#{media_category.id}_torrents"
           = t.sortable_column :title, :searchable => true
           = t.sortable_column :seeders
           = t.sortable_column :size

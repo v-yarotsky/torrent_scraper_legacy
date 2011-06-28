@@ -3,9 +3,10 @@ TorrentScraper::Application.routes.draw do
 
   root :to => "torrents#index"
   
-  resources :torrents, :only => [:index, :destroy] do
-    post :download, :on => :member
+  resources :torrents, :only => [:index] do
     collection do
+      delete :destroy
+      post :download
       scope ':tracker_id/:media_category_id' do
         post :sort
         post :search
