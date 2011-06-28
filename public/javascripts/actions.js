@@ -36,8 +36,7 @@ var getGroupIds = function() {
 	return $.makeArray($(".select_torrent:checked").map(function(idx, c) { return $(c).attr("data-id"); }));
 };
 
-$(function() {
-	bindRemoteActionLinks();
+var bindGroupCheckBoxes = function() {
 	$(".select_media_category_torrents").live("click", function() {
 		var $checkbox = $(this);
 		var $checkboxes = $checkbox.closest("table").find(".select_torrent");
@@ -47,4 +46,9 @@ $(function() {
 			$checkboxes.removeAttr("checked");
 		}
 	});
+};
+
+$(function() {
+	bindRemoteActionLinks();
+	bindGroupCheckBoxes();
 });
