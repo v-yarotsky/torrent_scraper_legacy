@@ -58,6 +58,9 @@ div#wrapper {
       text-align: right; }
     div#wrapper div.content div.tbl table td.center {
       text-align: center; }
+    div#wrapper div.content div.tbl table td.checkbox, div#wrapper div.content div.tbl table th.checkbox {
+      width: 16px;
+      text-align: center; }
 
 .simple_form {
   float: left; }
@@ -124,7 +127,7 @@ div#wrapper {
       position: absolute;
       background: url("/images/icons/expand.gif") no-repeat;
       text-indent: -9999px;
-      margin: -2px 0 0 -25px; }
+      margin: -5px 0 0 -25px; }
   .spoiler.expanded > h3.caption span.toggler {
     background: url("/images/icons/collapse.gif") no-repeat; }
   .spoiler.expanded > .content {

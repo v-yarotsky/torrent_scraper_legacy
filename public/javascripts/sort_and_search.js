@@ -37,7 +37,10 @@ var bindSearch = function() {
     }).end().find("input[type='text']").live("keydown", function(e) {
         if (e.which == 10 || e.which == 13) {
             filterTable($(this));
-        }
+        } else if (e.which == 27) {
+			$(this).closest("th").find(".search_toggler").click();
+			return false;
+		}
     }).live("click", function() { return false; });
 };
 
