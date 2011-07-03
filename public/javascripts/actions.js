@@ -46,6 +46,13 @@ var bindGroupCheckBoxes = function() {
 			$checkboxes.removeAttr("checked");
 		}
 	});
+	$(".select_torrent").live("click", function() {
+		var $checkbox = $(this);
+		var $group_checkbox = $checkbox.closest("table").find(".select_tracker_category_torrents");
+		if ($group_checkbox.is(":checked") && $checkbox.is(":not(:checked)")) {
+			$group_checkbox.removeAttr("checked");
+		}
+	});
 };
 
 $(function() {
