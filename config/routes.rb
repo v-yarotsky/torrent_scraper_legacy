@@ -7,7 +7,7 @@ TorrentScraper::Application.routes.draw do
     collection do
       delete :destroy
       post :download
-      scope ':tracker_id/:media_category_id' do
+      scope ':tracker_id/:tracker_category_id' do
         post :sort
         post :search
       end

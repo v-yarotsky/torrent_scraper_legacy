@@ -12,7 +12,7 @@ class Torrent < ActiveRecord::Base
   cattr_accessor :seeders_limit
 
   scope :for_tracker, ->(tracker) { tracker.blank? ? scoped : joins(:tracker_category).where("tracker_categories.tracker_id = ?", tracker.to_param) }
-  scope :for_category, ->(category) { category.blank? ? scoped : joins(:tracker_category).where("tracker_categories.media_category_id = ?", category.to_param) }
+  scope :for_category, ->(category) { category.blank? ? scoped : where("torrents.tracker_category_id = ?", category.to_param) }
   
   scope :search, lambda { |terms|    
     return scoped unless terms

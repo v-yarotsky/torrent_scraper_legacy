@@ -4,8 +4,9 @@
     %title TorrentScraper
     = stylesheet_link_tag "general.css"
     = yield :stylesheets if content_for?(:stylesheets)
-    = javascript_include_tag :defaults
-    = javascript_include_tag "jquery.cookie.js"
+    :javascript
+      JSCLASS_PATH = "external/JS.Class"
+    = javascript_include_tag :defaults, "external/jquery.cookie", "external/JS.Class/loader-browser", "external/JS.Class/core"
     = yield :javascripts if content_for?(:javascripts)
     = csrf_meta_tag
   %body

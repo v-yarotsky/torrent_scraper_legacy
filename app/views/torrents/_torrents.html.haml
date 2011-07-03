@@ -5,4 +5,4 @@
     .content
       - if torrents_for_tracker(tracker).empty?
         %p= "No torrents yet..."
-      = render :partial => "media_category", :collection => tracker.media_categories, :locals => { :tracker => tracker }
+      = render :partial => "tracker_category", :collection => tracker.tracker_categories, :locals => { :tracker => tracker }

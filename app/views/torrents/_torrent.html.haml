@@ -1,8 +1,8 @@
-%tr[torrent]
+%tr[torrent]{ "data-id" => torrent.id }
   %td.checkbox= check_box_tag "select_torrent_#{torrent.to_param}", 1, false, :class => "select_torrent", :id => "select_torrent_#{torrent.to_param}", "data-id" => torrent.to_param
-  %td= link_to torrent.title, torrent.tracker_link
-  %td= torrent.seeders
-  %td= number_to_human_size torrent.size
-  %td
+  %td.title= link_to torrent.title, torrent.tracker_link, :title => torrent.title
+  %td.seeders= torrent.seeders
+  %td.size= number_to_human_size torrent.size
+  %td.actions
     = remote_link_to_download torrent
     = remote_link_to_delete_torrent torrent

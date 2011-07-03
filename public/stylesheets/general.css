@@ -62,6 +62,13 @@ div#wrapper {
       width: 16px;
       text-align: center; }
 
+.tracker_category table {
+  table-layout: fixed; }
+.tracker_category .torrent .title {
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden; }
+
 .simple_form {
   float: left; }
   .simple_form label, .simple_form .nested_fields_label {

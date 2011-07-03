@@ -20,8 +20,8 @@ module TorrentsHelper
     torrents.select { |torrent| torrent.tracker_id == tracker.id }
   end
   
-  def torrents_for_tracker_and_media_category(tracker, media_category)
-    torrents.select { |torrent| torrent.tracker_id == tracker.id && torrent.media_category_id == media_category.id }
+  def torrents_for_tracker_and_tracker_category(tracker, tracker_category)
+    torrents.select { |torrent| torrent.tracker_id == tracker.id && torrent.tracker_category_id == tracker_category.id }
   end
 
 end

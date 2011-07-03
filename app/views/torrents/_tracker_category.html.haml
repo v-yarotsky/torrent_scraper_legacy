@@ -1,0 +1,15 @@
+- if torrents.for_tracker(tracker).for_category(tracker_category).any?
+  .spoiler.expanded[tracker_category]{ "data-id" => tracker_category.id }
+    %h3.caption
+      %span.toggler
+      %span.title= tracker_category.media_category_name
+    .tbl.content
+      %table
+        - table_header(tracker, tracker_category) do |t|
+          = t.column check_box_tag(tracker_category.id, 1, false, :class => "select_tracker_category_torrents", :id => "select_tracker_category_#{tracker_category.id}_torrents"), :class => "checkbox", :width => 26
+          = t.sortable_column :title, :searchable => true
+          = t.sortable_column :seeders, :width => 80, :align => :right
+          = t.sortable_column :size,    :width => 80, :align => :right
+          = t.column "",                :width => 50, :align => :right
+        %tbody
+          = render torrents_for_tracker_and_tracker_category(tracker, tracker_category)

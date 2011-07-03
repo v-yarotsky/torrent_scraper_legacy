@@ -30,7 +30,7 @@ class TorrentsController < ApplicationController
   
   def torrents
     return @torrents if defined? @torrents
-    torrents = Torrent.for_tracker(params[:tracker_id]).for_category(params[:media_category_id]).search(params[:search]).ordered(params[:column], params[:order])
+    torrents = Torrent.for_tracker(params[:tracker_id]).for_category(params[:tracker_category_id]).search(params[:search]).ordered(params[:column], params[:order])
     @torrents = Filter.instance.filter(torrents, DEFAULT_FILTER.merge(params))
     @torrents
   end

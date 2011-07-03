@@ -37,7 +37,7 @@ var getGroupIds = function() {
 };
 
 var bindGroupCheckBoxes = function() {
-	$(".select_media_category_torrents").live("click", function() {
+	$(".select_tracker_category_torrents").live("click", function() {
 		var $checkbox = $(this);
 		var $checkboxes = $checkbox.closest("table").find(".select_torrent");
 		if ($checkbox.attr("checked")) {
@@ -52,3 +52,24 @@ $(function() {
 	bindRemoteActionLinks();
 	bindGroupCheckBoxes();
 });
+
+var Torrent = new JS.Class({
+	initialize: function(id) {
+		this.id = id;
+		this.$element = $("#torrent_" + id);
+		this.title = this.$element.find(".title").text();
+		this.link = this.$element.find(".title a").attr("href");
+		this.seeders = this.$element.find(".seeders").text();
+		this.size = this.$element.find(".size").text();
+	}
+});
+
+var TrackerCategory = new JS.Class({
+	initialize: function(id) {
+		this.id = id;
+		this.$element = $("#tracker_category_" + id);
+		this.title = this.$element.find(".caption .title").text();
+		this.torrents = this.$element.find(".torrent").map(function(idx, element) { return new Torrent($(element).data("id")); });
+	}
+});
+
