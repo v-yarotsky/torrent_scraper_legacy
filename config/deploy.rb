@@ -17,6 +17,8 @@ set :rails_env, "production"
 set :rake, "$GEM_HOME/bin/rake"
 set :bundle, "$GEM_HOME/bin/bundle"
 
+after :deploy, "bundle:install"
+after :deploy, "migrate"
 after :deploy, "deploy:restart"
 
 namespace :deploy do
@@ -27,6 +29,10 @@ end
 
 task :reseed do
   run "cd #{deploy_to}/current && #{rake} db:migrate:reset && #{rake} db:seed"
+end
+
+task :migrate do
+  run "cd #{deploy_to}/current && #{rake} db:migrate"
 end
 
 namespace :bundle do
