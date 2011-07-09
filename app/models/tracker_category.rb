@@ -7,7 +7,7 @@ class TrackerCategory < ActiveRecord::Base
 
   before_save -> { 
     create_media_category_from_name; 
-    if media_category_id_changed?
+    if !new_record? && media_category_id_changed?
       ActiveRecord::Base.connection.execute("UPDATE torrents SET media_category_id = #{media_category_id} WHERE torrents.tracker_category_id = #{id}")
     end
   }
