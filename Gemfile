@@ -19,5 +19,6 @@ group :test do
   gem 'capistrano-ext'
   gem 'factory_girl'
   gem 'factory_girl_rails'
+  gem 'shoulda-matchers'
 end
 
