@@ -11,8 +11,13 @@ gem 'jquery-rails'
 gem 'block_helpers'
 gem 'thin'
 
-group :test, :development do
+group :test do
+  gem 'rspec'
+  gem 'rspec-rails'
+  gem 'capybara'
   gem 'capistrano'
   gem 'capistrano-ext'
+  gem 'factory_girl'
+  gem 'factory_girl_rails'
 end
 
